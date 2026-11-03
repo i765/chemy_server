@@ -1,13 +1,57 @@
 <!doctype html>
-<html lang="en">
+<html lang="ru-RU">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="src/assets/javascript.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>app</title>
-  </head>
-  <body>
-    <div id="app"></div>
+    <link rel="stylesheet" href="/src/style.css">
+    <script type="module" src="/src/alpine.js"></script>
     <script type="module" src="/src/main.js"></script>
-  </body>
+    <title>Объект 160-161</title>
+  </head>
+<body>
+  <div class="spa-layout"  x-data="{ page: 'linear' }">
+    <!-- сайдбар -->
+    <aside class="sidebar">
+      <nav class="sidebar-tree">
+        <ul>
+          <li x-data="{ sub: true }">
+            <a href="#" @click="sub = ! sub">Аналоговые</a>
+            <span x-show="sub">
+              <a href="#" @click="page = 'linear'" :class="{'active': page === 'linear'}">Линейные</a>
+              <a href="#" @click="page = 'calc'" :class="{'active': page === 'calc'}">Вычисляемые</a>
+              <a href="#" @click="page = 'deriv'" :class="{'active': page === 'deriv'}">Производные</a>
+            </span>
+          </li>
+          <li x-data="{ sub: false }">
+            <a href="#" @click="sub = ! sub">Дискретные</a>
+            <span x-show="sub">
+              <a href="#" @click="page = 'emergency'" :class="{'active': page === 'emergency'}">Аварийные</a>
+              <a href="#" @click="page = 'group1'" :class="{'active': page === 'group1'}">Группа 1</a>
+              <a href="#" @click="page = 'group2'" :class="{'active': page === 'group2'}">Группа 2</a>
+              <a href="#" @click="page = 'group3'" :class="{'active': page === 'group3'}">Группа 3</a>
+              <a href="#" @click="page = 'group4'" :class="{'active': page === 'group4'}">Группа 4</a>
+              <a href="#" @click="page = 'group5'" :class="{'active': page === 'group5'}">Группа 5</a>
+            </span>
+          </li>
+          <li x-data="{ sub: false }">
+            <a href="#" @click="sub = ! sub">Мнемосхемы</a>
+            <span x-show="sub">
+              <a href="#">Солевые</a>
+              <a href="#">Переработка вод ЦБС</a>
+              <a href="#">Узел газоочистки</a>
+              <a href="#">Спецпрачечная</a>
+            </span>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+    <!-- Основное содержимое -->
+    <main class="main-content">
+      <div class="content-section">
+        <div id="counter-root"></div>
+      </div>
+    </main>
+  </div>
+</body>
 </html>
