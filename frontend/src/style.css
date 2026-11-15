@@ -4,14 +4,14 @@
 
 :root {
     /* Color Palette */
-    --sidebar-bg: #333333; /* Dark Navy */
-    --sidebar-text: #131313; /* Light Gray */
-    --main-bg: #111; /* Light background */
-    --border-color: #ddd;
+    --sidebar-bg: #fafafa; 
+    --sidebar-text: #1d1ba4;
+    --sidebar-link: #0d0b6b;
+    --main-bg: #ffffff; 
+    --line-color: #1d1ba4;
     
     /* Dimensions */
     --sidebar-width-desktop: 300px;
-    --transition-speed: 0.1s;
 }
 
 * {
@@ -23,7 +23,6 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: var(--main-bg);
-    color: #bbbbbb;
     line-height: 1.6;
 }
 
@@ -38,97 +37,7 @@ body {
     min-height: 100vh;
 }
 
-/* ==========================================
-   3. SIDEBAR STYLING
-   ========================================== */
 
-.sidebar {
-    background-color: var(--sidebar-bg);
-    color: var(--sidebar-text);
-    margin: 5px;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 10px;
-}
-
-/* Основной контейнер дерева */
-.sidebar-tree {
-  max-width: 300px;
-  padding: 10px;
-}
-
-/* Сброс стилей списков */
-.sidebar-tree ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-/* Общие стили для ссылок (и родительских, и дочерних) */
-.sidebar-tree a {
-  display: flex;
-  align-items: center;
-  padding: 10px 14px;
-  color: #fff;
-  text-decoration: none;
-
-  font-size: 15px;
-  font-weight: 500;
-}
-
-/* Стилизация родительских пунктов (первый уровень) */
-.sidebar-tree > ul > li {
-  margin-bottom: 4px;
-}
-
-/* Добавляем иконку стрелочки для родительских пунктов */
-.sidebar-tree > ul > li > a::after {
-  content: "";
-  display: inline-block;
-  margin-left: auto;
-  width: 8px;
-  height: 8px;
-  border-right: 1px solid #888;
-  border-bottom: 1px solid #888;
-  transform: rotate(45deg);
-}
-
-/* Меняем направление стрелочки, когда меню открыто 
-   (используем селектор + span[style*="display: block"] или аналогичный, 
-   так как Alpine.js вешает inline-стили на x-show) */
-.sidebar-tree > ul > li:has(span:not([style*="display: none"])) > a::after {
-  transform: rotate(-135deg);
-  margin-top: 4px;
-}
-
-/* Контейнер дочерних элементов (второй уровень) */
-.sidebar-tree span {
-  display: block;
-  padding-left: 16px; /* Отступ слева для эффекта вложенности */
-  border-left: 1px solid #666; /* Визуальная линия вложенности */
-}
-
-/* Стили для дочерних ссылок */
-.sidebar-tree span a {
-  margin: 5px 0;
-  padding: 6px 13px;
-  font-size: 14px;
-  color: #ccc;
-  font-weight: 400;
-  border-radius: 5px;
-}
-
-/* Ховер для дочерних ссылок */
-.sidebar-tree span a:hover {
-  background-color: #666;
-  color: #fff; /* Акцентный синий цвет при ховере на подпункт */
-}
-
-.sidebar-tree span a.active {
-  background-color: #555;
-  color: #fff; /* Акцентный синий цвет при ховере на подпункт */
-}
 
 /* ==========================================
    4. MAIN CONTENT STYLING

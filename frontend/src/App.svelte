@@ -4,4 +4,4 @@
 
 <div class="spa-layout">
   <SideBar />
-</div>
+</div>``

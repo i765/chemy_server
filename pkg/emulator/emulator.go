@@ -21,10 +21,9 @@ type Stream struct {
 }
 
 type Emulator struct {
-	stream    Stream
-	FrameTime int
-	step      float64
-	t         float64
+	stream Stream
+	step   float64
+	t      float64
 }
 
 func NewEmulator() *Emulator {
@@ -37,7 +36,8 @@ func (e *Emulator) Run() error {
 	for {
 		e.stream = e.Next()
 		// runtime.EventsEmit(ctx, "stream", e.stream)
-		time.Sleep(time.Millisecond * time.Duration(e.FrameTime))
+
+		time.Sleep(time.Millisecond * time.Duration(400))
 	}
 }
 
