@@ -128,7 +128,7 @@ func (a *App) startServerProcess(ip string, port int) {
 	// 1. Создаем сервер
 	srv := &http.Server{
 		Addr:    address,
-		Handler: mux,
+		Handler: enableCORS(mux),
 	}
 
 	fmt.Printf(CheckMark+" Сервер запущен на http://%s 🚀\n", address)
@@ -160,4 +160,18 @@ func (a *App) frameHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 	}
+}
+
+// Разрешаем CORS
+func enableCORS(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		w.Header().Set("Access-Control-Allow-Methods", "GET")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		if r.Method == http.MethodOptions {
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+		next.ServeHTTP(w, r)
+	})
 }

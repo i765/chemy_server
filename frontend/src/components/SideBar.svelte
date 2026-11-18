@@ -124,11 +124,6 @@
   .sidebar-tree ul {
     list-style: none;
   }
-
-  .sidebar-tree ul a {
-    /* color: var(--sidebar-link); */
-  }
-
   /* Родительские пункты — теперь это button (доступность + клик) */
   .tree-parent {
     display: flex;

@@ -1,16 +1,11 @@
-/* ==========================================
-   1. BASE STYLES & CSS VARIABLES
-   ========================================== */
-
 :root {
     /* Color Palette */
     --sidebar-bg: #fafafa; 
-    --sidebar-text: #1d1ba4;
-    --sidebar-link: #0d0b6b;
+    --sidebar-text: #353535;
+    --sidebar-link: #353535;
     --main-bg: #ffffff; 
-    --line-color: #1d1ba4;
+    --line-color: #353535;
     
-    /* Dimensions */
     --sidebar-width-desktop: 300px;
 }
 
@@ -26,10 +21,6 @@ body {
     line-height: 1.6;
 }
 
-/* ==========================================
-   2. MAIN LAYOUT (CSS GRID)
-   ========================================== */
-
 .spa-layout {
     display: grid;
     /* Define two columns: Sidebar and Main Content */
@@ -37,23 +28,7 @@ body {
     min-height: 100vh;
 }
 
-
-
-/* ==========================================
-   4. MAIN CONTENT STYLING
-   ========================================== */
-
 .main-content {
     padding: 30px;
-    overflow-y: auto; /* Ensure content scrolls independently */
-}
-
-.main-content h1 {
-    color: #cfcfcf;
-    margin-bottom: 15px;
-}
-
-.content-section p {
-    margin-bottom: 10px;
-    text-align: justify;
+    overflow-y: auto; 
 }
