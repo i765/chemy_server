@@ -27,6 +27,11 @@ type Config struct {
 }
 
 func Setup() (*Config, error) {
+	fmt.Println("АО \"ЦС \"Звездочка\", Объект #160-161.")
+	fmt.Println("Сервер обработки данных УСО, версия 0.3.0")
+	fmt.Println("Разработчик Верещагин Павел Артемович, эл. почта: ipashu@gmail.com")
+	fmt.Println("")
+
 	// Получаем доступные порты.
 	ports, err := serial.GetPortsList()
 	if err != nil {

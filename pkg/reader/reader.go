@@ -2,7 +2,6 @@ package reader
 
 import (
 	"fmt"
-	"log"
 	"time"
 
 	"go.bug.st/serial"
@@ -59,12 +58,12 @@ type Reader struct {
 	acSums     []int
 	dcSums     []int
 
-	stream Stream
+	Frame Frame
 }
 
-type Stream struct {
-	ACData []int  `json:"ACData"`
-	DCData []bool `json:"DCData"`
+type Frame struct {
+	AnalogValues   []int
+	DiscreteValues []bool
 }
 
 // NewReader открывает порт (блокирует, пока порт не появится)
@@ -87,7 +86,6 @@ func NewReader(portName string, baud int, parity string, bufferSize int) *Reader
 		// ждем 100 мс
 		time.Sleep(100 * time.Millisecond)
 
-		log.Printf("Открываем порт: %s", portName)
 		// пытаемся открыть порт
 		p, err = serial.Open(portName, mode)
 
@@ -100,13 +98,14 @@ func NewReader(portName string, baud int, parity string, bufferSize int) *Reader
 		// если порт открылся, то
 		if err == nil {
 			// выводим информацию о том, что порт готов к использованию
-			log.Print("Порт готов для чтения")
+			fmt.Printf("\033[32m✔\033[0m Чтение данных через %s... ", portName)
 			break
 		}
 
 		// если порт не открылся, то
 		// выводим информацию об ошибке
-		log.Printf("Не удалось открыть: %s: %v", portName, err)
+
+		fmt.Printf("\033[31m✖\033[0m Не удалось открыть: %s: %v\n", portName, err)
 
 		// ждем 5 сек
 		time.Sleep(time.Second * 5)
@@ -147,7 +146,7 @@ func parseParity(parity string) serial.Parity {
 // close – закрывает порт (может быть вызвано несколько раз)
 func (r *Reader) close() error {
 	if r.port != nil {
-		log.Println("Закрываем порт...")
+		fmt.Println("Закрываем порт...")
 		err := r.port.Close()
 		return err
 	}
@@ -166,12 +165,12 @@ func (r *Reader) reset() {
 	r.analogReady = false
 	r.discreteReady = false
 
-	log.Println("Выполнен сброс парсера")
+	fmt.Println("Выполнен сброс парсера")
 
 }
 
 // Run – основной цикл чтения
-func (r *Reader) Run() error {
+func (r *Reader) Run(liveChannel chan Frame) {
 
 	defer r.close()
 
@@ -185,7 +184,8 @@ func (r *Reader) Run() error {
 		// ошибка чтения
 		if err != nil {
 			r.reset()
-			return fmt.Errorf("ошибка чтения: %w", err)
+			fmt.Printf("Ошибка чтения: %e", err)
+			break
 		}
 
 		// нет данных для чтения
@@ -212,7 +212,7 @@ func (r *Reader) Run() error {
 				}
 			case stateRecvAnalog:
 				if r.analogOffset+r.analogIndex >= totalAnalogSize {
-					log.Println("Переполненние аналогового блока – СБРОС")
+					fmt.Println("Переполненние аналогового блока – СБРОС")
 					r.reset()
 					break
 				}
@@ -222,18 +222,18 @@ func (r *Reader) Run() error {
 					if r.analogMarker == 0xF6 {
 						vals, err := r.parseAnalogPack(r.analogData)
 						if err != nil {
-							log.Printf("Ошибка парсинга аналогового блока: %v", err)
+							fmt.Printf("Ошибка парсинга аналогового блока: %v", err)
 							r.reset()
 							break
 						}
-						r.stream.ACData = vals
+						r.Frame.AnalogValues = vals
 						r.analogReady = true
 					}
 					r.state = stateIdle
 				}
 			case stateRecvDiscrete:
 				if r.discreteOffset+r.discreteIndex >= totalDiscreteSize {
-					log.Println("Переполненние дискретного блока – СБРОС")
+					fmt.Println("Переполненние дискретного блока – СБРОС")
 					r.reset()
 					break
 				}
@@ -243,11 +243,11 @@ func (r *Reader) Run() error {
 					if r.discreteMarker == 0xE1 {
 						bools, err := r.bytesToBools(r.discreteData)
 						if err != nil {
-							log.Printf("Ошибка парсинга дискретного блока: %v", err)
+							fmt.Printf("Ошибка парсинга дискретного блока: %v", err)
 							r.reset()
 							break
 						}
-						r.stream.DCData = bools
+						r.Frame.DiscreteValues = bools
 						r.discreteReady = true
 					}
 					r.state = stateIdle
@@ -260,34 +260,35 @@ func (r *Reader) Run() error {
 
 			// --- пакетное сглаживание ---
 			for i := 0; i < analogChannels; i++ {
-				r.acSums[i] += r.stream.ACData[i]
+				r.acSums[i] += r.Frame.AnalogValues[i]
 			}
 			for i := 0; i < discreteChannels; i++ {
-				if r.stream.DCData[i] {
+				if r.Frame.DiscreteValues[i] {
 					r.dcSums[i]++
 				}
 			}
 			r.batchCount++
 
 			if r.batchCount == r.bufferSize {
-				avg := Stream{
-					ACData: make([]int, analogChannels),
-					DCData: make([]bool, discreteChannels),
+				avg := Frame{
+					AnalogValues:   make([]int, analogChannels),
+					DiscreteValues: make([]bool, discreteChannels),
 				}
 
 				for i := 0; i < analogChannels; i++ {
-					avg.ACData[i] = r.acSums[i] / r.bufferSize
+					avg.AnalogValues[i] = r.acSums[i] / r.bufferSize
 				}
 
 				for i := 0; i < discreteChannels; i++ {
-					avg.DCData[i] = r.dcSums[i] > r.bufferSize/2 // строгое большинство
+					avg.DiscreteValues[i] = r.dcSums[i] > r.bufferSize/2 // строгое большинство
 				}
 
-				// runtime.EventsEmit(ctx, "stream", avg)
+				liveChannel <- avg // отправляем данные в канал
 
 				// полный сброс batch
 				r.batchCount = 0
 				for i := range r.acSums {
+
 					r.acSums[i] = 0
 				}
 				for i := range r.dcSums {
@@ -300,7 +301,6 @@ func (r *Reader) Run() error {
 		}
 
 	}
-
 }
 
 // ---------------------------------------------------------------------

@@ -6,71 +6,90 @@ import (
 	"time"
 )
 
-// ---------------------------------------------------------------------
-// Параметры эмуляции
-// ---------------------------------------------------------------------
 const (
 	analogChannels   = 112
 	discreteChannels = 320
-	analogChangeStep = 0.1
+	frameTime        = 1000 // мс
 )
 
-type Stream struct {
-	ACData []int  `json:"ACData"`
-	DCData []bool `json:"DCData"`
+type Frame struct {
+	AnalogValues   []int
+	DiscreteValues []bool
 }
 
+// Emulator генерирует независимые правдоподобные значения каналов для демонстрации UI.
+// Каналы не имеют семантической привязки друг к другу или к оборудованию.
 type Emulator struct {
-	stream Stream
-	step   float64
-	t      float64
+	rng *rand.Rand
+
+	analog       [analogChannels]float64
+	analogTarget [analogChannels]float64
+	analogSpeed  [analogChannels]float64
+	discrete     [discreteChannels]bool
 }
 
 func NewEmulator() *Emulator {
-	return &Emulator{
-		step: analogChangeStep,
+	e := &Emulator{rng: rand.New(rand.NewSource(time.Now().UnixNano()))}
+
+	for i := range e.analog {
+		// Начальные значения распределены по всему диапазону, но не у границ.
+		e.analog[i] = e.rnd(100, 923)
+		e.analogTarget[i] = e.rnd(0, 1023)
+		// Разная скорость изменения исключает синхронное движение каналов.
+		e.analogSpeed[i] = e.rnd(0.004, 0.025)
 	}
+
+	for i := range e.discrete {
+		e.discrete[i] = e.rng.Intn(2) == 1
+	}
+
+	return e
 }
 
-func (e *Emulator) Run() error {
+func (e *Emulator) rnd(min, max float64) float64 {
+	return min + e.rng.Float64()*(max-min)
+}
+
+func clamp(value, min, max float64) float64 {
+	return math.Max(min, math.Min(max, value))
+}
+
+func (e *Emulator) Run(liveChannel chan Frame) {
+	ticker := time.NewTicker(time.Millisecond * time.Duration(frameTime))
+	defer ticker.Stop()
 	for {
-		e.stream = e.Next()
-		// runtime.EventsEmit(ctx, "stream", e.stream)
-
-		time.Sleep(time.Millisecond * time.Duration(400))
+		liveChannel <- e.Next()
+		<-ticker.C
 	}
 }
 
-func (e *Emulator) Next() Stream {
-	stream := Stream{
-		ACData: make([]int, analogChannels),
-		DCData: make([]bool, discreteChannels),
+// Next возвращает очередной кадр с неизменным количеством каналов.
+func (e *Emulator) Next() Frame {
+	frame := Frame{
+		AnalogValues:   make([]int, analogChannels),
+		DiscreteValues: make([]bool, discreteChannels),
 	}
 
-	for i := 0; i < analogChannels; i++ {
-		s := math.Sin(e.t + float64(i)*0.1)
-		stream.ACData[i] = int((s + 1) * 511.5)
-	}
-
-	// Обрабатываем дискретные каналы
-	if e.stream.DCData == nil {
-		// Инициализация при первом запуске - все каналы получают случайные значения
-		for i := 0; i < discreteChannels; i++ {
-			stream.DCData[i] = rand.Intn(2) == 1
+	for i := range e.analog {
+		// Периодически выбираем новую цель. Само значение подходит к ней плавно.
+		if e.rng.Float64() < 0.008 {
+			e.analogTarget[i] = e.rnd(0, 1023)
 		}
-	} else {
-		// Копируем текущее состояние всех дискретных каналов
-		copy(stream.DCData, e.stream.DCData)
 
-		// Выбираем один случайный дискретный канал для изменения
-		if discreteChannels > 0 {
-			randomIndex := rand.Intn(discreteChannels)
-			// Меняем значение только этого канала на противоположное
-			stream.DCData[randomIndex] = !stream.DCData[randomIndex]
-		}
+		value := e.analog[i]
+		value += (e.analogTarget[i] - value) * e.analogSpeed[i]
+		// Небольшой шум имитирует колебания измерений.
+		value += e.rnd(-1.2, 1.2)
+		e.analog[i] = clamp(value, 0, 1023)
+		frame.AnalogValues[i] = int(math.Round(e.analog[i]))
 	}
 
-	e.t += e.step
+	for i := range e.discrete {
+		if e.rng.Float64() < 0.00015 {
+			e.discrete[i] = !e.discrete[i]
+		}
+		frame.DiscreteValues[i] = e.discrete[i]
+	}
 
-	return stream
+	return frame
 }
