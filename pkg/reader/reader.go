@@ -1,6 +1,7 @@
 package reader
 
 import (
+	"context"
 	"fmt"
 	"time"
 
@@ -58,7 +59,8 @@ type Reader struct {
 	acSums     []int
 	dcSums     []int
 
-	Frame Frame
+	Frame  Frame
+	Stream chan Frame
 }
 
 type Frame struct {
@@ -121,6 +123,7 @@ func NewReader(portName string, baud int, parity string, bufferSize int) *Reader
 		dcSums:       make([]int, discreteChannels),
 		batchCount:   0,
 		bufferSize:   bufferSize,
+		Stream:       make(chan Frame),
 	}
 
 }
@@ -143,14 +146,12 @@ func parseParity(parity string) serial.Parity {
 	}
 }
 
-// close – закрывает порт (может быть вызвано несколько раз)
-func (r *Reader) close() error {
+// close – закрывает порт и канал
+func (r *Reader) close() {
 	if r.port != nil {
-		fmt.Println("Закрываем порт...")
-		err := r.port.Close()
-		return err
+		r.port.Close()        // закрываем порт
+		defer close(r.Stream) // закрываем канал
 	}
-	return nil
 }
 
 // reset – возвращает парсер в исходное состояние
@@ -164,143 +165,149 @@ func (r *Reader) reset() {
 	r.discreteOffset = 0
 	r.analogReady = false
 	r.discreteReady = false
-
 	fmt.Println("Выполнен сброс парсера")
-
 }
 
 // Run – основной цикл чтения
-func (r *Reader) Run(liveChannel chan Frame) {
-
-	defer r.close()
+func (r *Reader) Run(ctx context.Context) {
 
 	// создаем буфер для чтения порта
 	buf := make([]byte, bufferSize)
 
+Loop: // Метка для цикла (для break внутри select)
 	// основной цикл чтения
 	for {
-		n, err := r.port.Read(buf)
+		select {
 
-		// ошибка чтения
-		if err != nil {
-			r.reset()
-			fmt.Printf("Ошибка чтения: %e", err)
-			break
-		}
+		case <-ctx.Done():
+			break Loop // Выход из цикла
 
-		// нет данных для чтения
-		if n == 0 {
-			continue
-		}
+		default:
+			n, err := r.port.Read(buf)
 
-		// разбор полученных байтов
-		for i := 0; i < n; i++ {
-			b := buf[i]
-			switch r.state {
-			case stateIdle:
-				switch {
-				case b >= 0xF0 && b <= 0xF6: // аналоговый пакет
-					r.state = stateRecvAnalog
-					r.analogMarker = b
-					r.analogIndex = 0
-					r.analogOffset = int(b-0xF0) * packetSize
-				case b >= 0xE0 && b <= 0xE1: // дискретный пакет
-					r.state = stateRecvDiscrete
-					r.discreteMarker = b
-					r.discreteIndex = 0
-					r.discreteOffset = int(b-0xE0) * discretePacketSize
-				}
-			case stateRecvAnalog:
-				if r.analogOffset+r.analogIndex >= totalAnalogSize {
-					fmt.Println("Переполненние аналогового блока – СБРОС")
-					r.reset()
-					break
-				}
-				r.analogData[r.analogOffset+r.analogIndex] = b
-				r.analogIndex++
-				if r.analogIndex == packetSize {
-					if r.analogMarker == 0xF6 {
-						vals, err := r.parseAnalogPack(r.analogData)
-						if err != nil {
-							fmt.Printf("Ошибка парсинга аналогового блока: %v", err)
-							r.reset()
-							break
-						}
-						r.Frame.AnalogValues = vals
-						r.analogReady = true
+			// ошибка чтения
+			if err != nil {
+				r.reset()
+				fmt.Printf("Ошибка чтения: %e", err)
+				break Loop
+			}
+
+			// нет данных для чтения
+			if n == 0 {
+				continue
+			}
+
+			// разбор полученных байтов
+			for i := 0; i < n; i++ {
+				b := buf[i]
+				switch r.state {
+				case stateIdle:
+					switch {
+					case b >= 0xF0 && b <= 0xF6: // аналоговый пакет
+						r.state = stateRecvAnalog
+						r.analogMarker = b
+						r.analogIndex = 0
+						r.analogOffset = int(b-0xF0) * packetSize
+					case b >= 0xE0 && b <= 0xE1: // дискретный пакет
+						r.state = stateRecvDiscrete
+						r.discreteMarker = b
+						r.discreteIndex = 0
+						r.discreteOffset = int(b-0xE0) * discretePacketSize
 					}
-					r.state = stateIdle
-				}
-			case stateRecvDiscrete:
-				if r.discreteOffset+r.discreteIndex >= totalDiscreteSize {
-					fmt.Println("Переполненние дискретного блока – СБРОС")
-					r.reset()
-					break
-				}
-				r.discreteData[r.discreteOffset+r.discreteIndex] = b
-				r.discreteIndex++
-				if r.discreteIndex == discretePacketSize {
-					if r.discreteMarker == 0xE1 {
-						bools, err := r.bytesToBools(r.discreteData)
-						if err != nil {
-							fmt.Printf("Ошибка парсинга дискретного блока: %v", err)
-							r.reset()
-							break
-						}
-						r.Frame.DiscreteValues = bools
-						r.discreteReady = true
+				case stateRecvAnalog:
+					if r.analogOffset+r.analogIndex >= totalAnalogSize {
+						fmt.Println("Переполненние аналогового блока")
+						r.reset()
+						break Loop
 					}
-					r.state = stateIdle
+					r.analogData[r.analogOffset+r.analogIndex] = b
+					r.analogIndex++
+					if r.analogIndex == packetSize {
+						if r.analogMarker == 0xF6 {
+							vals, err := r.parseAnalogPack(r.analogData)
+							if err != nil {
+								fmt.Printf("Ошибка парсинга аналогового блока: %v", err)
+								r.reset()
+								break Loop
+							}
+							r.Frame.AnalogValues = vals
+							r.analogReady = true
+						}
+						r.state = stateIdle
+					}
+				case stateRecvDiscrete:
+					if r.discreteOffset+r.discreteIndex >= totalDiscreteSize {
+						fmt.Println("Переполненние дискретного блока – СБРОС")
+						r.reset()
+						break Loop
+					}
+					r.discreteData[r.discreteOffset+r.discreteIndex] = b
+					r.discreteIndex++
+					if r.discreteIndex == discretePacketSize {
+						if r.discreteMarker == 0xE1 {
+							bools, err := r.bytesToBools(r.discreteData)
+							if err != nil {
+								fmt.Printf("Ошибка парсинга дискретного блока: %v", err)
+								r.reset()
+								break Loop
+							}
+							r.Frame.DiscreteValues = bools
+							r.discreteReady = true
+						}
+						r.state = stateIdle
+					}
 				}
 			}
-		}
 
-		// Полный кадр получен
-		if r.analogReady && r.discreteReady {
+			// Полный кадр получен
+			if r.analogReady && r.discreteReady {
 
-			// --- пакетное сглаживание ---
-			for i := 0; i < analogChannels; i++ {
-				r.acSums[i] += r.Frame.AnalogValues[i]
-			}
-			for i := 0; i < discreteChannels; i++ {
-				if r.Frame.DiscreteValues[i] {
-					r.dcSums[i]++
-				}
-			}
-			r.batchCount++
-
-			if r.batchCount == r.bufferSize {
-				avg := Frame{
-					AnalogValues:   make([]int, analogChannels),
-					DiscreteValues: make([]bool, discreteChannels),
-				}
-
+				// --- пакетное сглаживание ---
 				for i := 0; i < analogChannels; i++ {
-					avg.AnalogValues[i] = r.acSums[i] / r.bufferSize
+					r.acSums[i] += r.Frame.AnalogValues[i]
 				}
-
 				for i := 0; i < discreteChannels; i++ {
-					avg.DiscreteValues[i] = r.dcSums[i] > r.bufferSize/2 // строгое большинство
+					if r.Frame.DiscreteValues[i] {
+						r.dcSums[i]++
+					}
+				}
+				r.batchCount++
+
+				if r.batchCount == r.bufferSize {
+					avg := Frame{
+						AnalogValues:   make([]int, analogChannels),
+						DiscreteValues: make([]bool, discreteChannels),
+					}
+
+					for i := 0; i < analogChannels; i++ {
+						avg.AnalogValues[i] = r.acSums[i] / r.bufferSize
+					}
+
+					for i := 0; i < discreteChannels; i++ {
+						avg.DiscreteValues[i] = r.dcSums[i] > r.bufferSize/2 // строгое большинство
+					}
+
+					r.Stream <- avg // отправляем данные в канал
+
+					// полный сброс batch
+					r.batchCount = 0
+					for i := range r.acSums {
+						r.acSums[i] = 0
+					}
+					for i := range r.dcSums {
+						r.dcSums[i] = 0
+					}
 				}
 
-				liveChannel <- avg // отправляем данные в канал
-
-				// полный сброс batch
-				r.batchCount = 0
-				for i := range r.acSums {
-
-					r.acSums[i] = 0
-				}
-				for i := range r.dcSums {
-					r.dcSums[i] = 0
-				}
+				r.analogReady = false
+				r.discreteReady = false
 			}
-
-			r.analogReady = false
-			r.discreteReady = false
 		}
-
 	}
+
+	fmt.Println("\nОстановка чтения.")
+	r.close()
+
 }
 
 // ---------------------------------------------------------------------

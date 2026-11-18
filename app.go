@@ -4,18 +4,24 @@ import (
 	"chemyserver/pkg/emulator"
 	"chemyserver/pkg/reader"
 	"chemyserver/pkg/welcome"
+	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"io/fs"
+	"log"
 	"net"
 	"net/http"
 	"os"
 	"strconv"
 	"sync"
+	"time"
 )
 
 type App struct {
 	Frame          Frame `json:"frame"`
 	ChannelsConfig []byte
+	ctx            context.Context
 	mu             sync.RWMutex
 }
 
@@ -39,7 +45,9 @@ func NewApp() *App {
 
 }
 
-func (a *App) run() {
+func (a *App) run(ctx context.Context) {
+
+	a.ctx = ctx
 
 	// Получение конфигурации.
 	appConfig, err := welcome.Setup()
@@ -62,33 +70,13 @@ func (a *App) run() {
 
 	}
 
-	// Инициализация frontend.
-	frontendFS, err := fs.Sub(assets, "frontend/dist")
+	go a.startServerProcess(appConfig.ServerIP, appConfig.ServerPort)
 
-	if err != nil {
-		fmt.Println(ErrorMark+" Ошибка загрузки frontend:", err)
-		os.Exit(1)
-		return
-	}
+	<-ctx.Done()
 
-	// Статические файлы frontend.
-	fileServer := http.FileServer(http.FS(frontendFS))
+	fmt.Println("Завершение работы приложения…")
 
-	mux := http.NewServeMux()
-	mux.Handle("/", fileServer)
-	mux.HandleFunc("/config", configHandler(a.ChannelsConfig))
-	mux.HandleFunc("/frame", a.frameHandler)
-
-	// Формируем адрес сервера.
-	address := net.JoinHostPort(appConfig.ServerIP, strconv.Itoa(appConfig.ServerPort))
-
-	// Запускаем HTTP-сервер.
-	fmt.Printf(CheckMark+" Сервер запущен на http://%s 🚀\n", address)
-
-	if err := http.ListenAndServe(address, mux); err != nil {
-		fmt.Println(ErrorMark+" Ошибка сервера:", err)
-		os.Exit(1)
-	}
+	time.Sleep(time.Second * 1)
 
 }
 
@@ -96,31 +84,80 @@ func (a *App) startReadingProcess(seialPort string) {
 
 	r := reader.NewReader(seialPort, 19200, "N", 8)
 
-	ch := make(chan reader.Frame)
+	go r.Run(a.ctx)
 
-	go r.Run(ch)
-
-	for values := range ch {
+	for values := range r.Stream {
 		a.mu.Lock()
 		a.Frame.AnalogValues = values.AnalogValues
 		a.Frame.DiscreteValues = values.DiscreteValues
 		a.mu.Unlock()
 	}
+
+	fmt.Println("Синхронизация потоков остановлена.")
+
 }
 
 func (a *App) startEmulatorProcess() {
 
 	e := emulator.NewEmulator()
 
-	ch := make(chan emulator.Frame)
+	go e.Run(a.ctx)
 
-	go e.Run(ch)
-
-	for values := range ch {
+	for values := range e.Stream {
 		a.mu.Lock()
 		a.Frame.AnalogValues = values.AnalogValues
 		a.Frame.DiscreteValues = values.DiscreteValues
 		a.mu.Unlock()
 	}
 
+	fmt.Println("Синхронизация потоков остановлена.")
+
+}
+
+func (a *App) startServerProcess(ip string, port int) {
+	subFS, _ := fs.Sub(assets, "frontend/dist")
+
+	mux := http.NewServeMux()
+	mux.Handle("/", http.FileServerFS(subFS))
+	mux.HandleFunc("/config", configHandler(a.ChannelsConfig))
+	mux.HandleFunc("/frame", a.frameHandler)
+
+	// Формируем адрес сервера.
+	address := net.JoinHostPort(ip, strconv.Itoa(port))
+
+	// 1. Создаем сервер
+	srv := &http.Server{
+		Addr:    address,
+		Handler: mux,
+	}
+
+	fmt.Printf(CheckMark+" Сервер запущен на http://%s 🚀\n", address)
+
+	err := srv.ListenAndServe()
+
+	if err != nil && !errors.Is(err, http.ErrServerClosed) {
+		log.Printf("HTTP server error: %v", err)
+	}
+
+}
+
+// Отдаем JSON конфигурации
+func configHandler(data []byte) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.Write(data)
+	}
+}
+
+// Отдаем JSON поток данных
+func (a *App) frameHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Content-Type", "application/json")
+
+	a.mu.RLock()
+	err := json.NewEncoder(w).Encode(a.Frame)
+	a.mu.RUnlock()
+
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+	}
 }

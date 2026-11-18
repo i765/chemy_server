@@ -1,6 +1,7 @@
 package emulator
 
 import (
+	"context"
 	"math"
 	"math/rand"
 	"time"
@@ -26,10 +27,15 @@ type Emulator struct {
 	analogTarget [analogChannels]float64
 	analogSpeed  [analogChannels]float64
 	discrete     [discreteChannels]bool
+
+	Stream chan Frame
 }
 
 func NewEmulator() *Emulator {
-	e := &Emulator{rng: rand.New(rand.NewSource(time.Now().UnixNano()))}
+	e := &Emulator{
+		rng:    rand.New(rand.NewSource(time.Now().UnixNano())),
+		Stream: make(chan Frame),
+	}
 
 	for i := range e.analog {
 		// Начальные значения распределены по всему диапазону, но не у границ.
@@ -54,12 +60,16 @@ func clamp(value, min, max float64) float64 {
 	return math.Max(min, math.Min(max, value))
 }
 
-func (e *Emulator) Run(liveChannel chan Frame) {
-	ticker := time.NewTicker(time.Millisecond * time.Duration(frameTime))
-	defer ticker.Stop()
+func (e *Emulator) Run(ctx context.Context) {
+	defer close(e.Stream)
+
 	for {
-		liveChannel <- e.Next()
-		<-ticker.C
+		select {
+		case <-ctx.Done():
+			return
+		case e.Stream <- e.Next():
+			time.Sleep(frameTime * time.Millisecond)
+		}
 	}
 }
 

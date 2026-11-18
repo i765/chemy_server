@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"embed"
-	"encoding/json"
-	"net/http"
+	"os"
+	"os/signal"
+	"syscall"
 )
 
 //go:embed frontend/dist
@@ -16,26 +18,10 @@ const (
 )
 
 func main() {
+	// Создаем контекст, который отменится при получении SIGINT (Ctrl+C) или SIGTERM
+	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, syscall.SIGTERM)
+	defer stop()
+
 	app := NewApp()
-	app.run()
-}
-
-// Отдаем JSON конфигурации
-func configHandler(data []byte) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		w.Write(data)
-	}
-}
-
-func (a *App) frameHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-
-	a.mu.RLock()
-	err := json.NewEncoder(w).Encode(a.Frame)
-	a.mu.RUnlock()
-
-	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
-	}
+	app.run(ctx)
 }
