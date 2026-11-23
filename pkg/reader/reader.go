@@ -3,6 +3,7 @@ package reader
 import (
 	"context"
 	"fmt"
+	"strconv"
 	"time"
 
 	"go.bug.st/serial"
@@ -12,14 +13,14 @@ import (
 // Параметры протокола
 // ---------------------------------------------------------------------
 const (
-	bufferSize         = 32
+	AnalogChannels     = 112
+	DiscreteChannels   = 320
+	readBufferSize     = 32
 	packetSize         = 32
-	analogChannels     = 112
-	totalAnalogSize    = 224 // 112 * 2 байта
+	totalAnalogSize    = 224
 	discretePacketSize = 20
-	totalDiscreteSize  = 40  // 2 пакета по 20 байт
-	discreteChannels   = 320 // 40 байт по 8 бит
-	batchSize          = 10  // количество пакетов в сглаживающем буфере
+	totalDiscreteSize  = 40 // 2 пакета по 20 байт
+	batchSize          = 10 // количество пакетов в сглаживающем буфере
 )
 
 // ---------------------------------------------------------------------
@@ -70,7 +71,10 @@ type Frame struct {
 
 // NewReader открывает порт (блокирует, пока порт не появится)
 // Возвращает *Reader, готовый к использованию
-func NewReader(portName string, baud int, parity string, bufferSize int) *Reader {
+func NewReader(portName string, baudStr string, parity string, bufferSizeStr string) *Reader {
+
+	baud, err := strconv.Atoi(baudStr)
+	bufferSize, err := strconv.Atoi(bufferSizeStr)
 
 	// mode - настройки для открытия порта
 	mode := &serial.Mode{
@@ -78,36 +82,32 @@ func NewReader(portName string, baud int, parity string, bufferSize int) *Reader
 		Parity:   parseParity(parity),
 	}
 
-	var p serial.Port
-
+	var port serial.Port
 	// открываем порт
 	for {
-
-		var err error
 
 		// ждем 100 мс
 		time.Sleep(100 * time.Millisecond)
 
 		// пытаемся открыть порт
-		p, err = serial.Open(portName, mode)
+		port, err = serial.Open(portName, mode)
 
 		if err == nil {
 			// если порт открыт, то
 			// устанавливаем таймаут чтения для порта
-			err = p.SetReadTimeout(500 * time.Millisecond)
+			err = port.SetReadTimeout(500 * time.Millisecond)
 		}
 
 		// если порт открылся, то
 		if err == nil {
-			// выводим информацию о том, что порт готов к использованию
-			fmt.Printf("\033[32m✔\033[0m Чтение данных через %s... ", portName)
+			fmt.Print("⏳ Тест УСО…")
 			break
 		}
 
 		// если порт не открылся, то
 		// выводим информацию об ошибке
 
-		fmt.Printf("\033[31m✖\033[0m Не удалось открыть: %s: %v\n", portName, err)
+		fmt.Printf("\n\033[31m✖ Не удалось открыть: %s: %v \033[0m", portName, err)
 
 		// ждем 5 сек
 		time.Sleep(time.Second * 5)
@@ -115,12 +115,12 @@ func NewReader(portName string, baud int, parity string, bufferSize int) *Reader
 	}
 
 	return &Reader{
-		port:         p,
+		port:         port,
 		state:        stateIdle,
 		analogData:   make([]byte, totalAnalogSize),
 		discreteData: make([]byte, totalDiscreteSize),
-		acSums:       make([]int, analogChannels),
-		dcSums:       make([]int, discreteChannels),
+		acSums:       make([]int, AnalogChannels),
+		dcSums:       make([]int, DiscreteChannels),
 		batchCount:   0,
 		bufferSize:   bufferSize,
 		Stream:       make(chan Frame),
@@ -131,15 +131,15 @@ func NewReader(portName string, baud int, parity string, bufferSize int) *Reader
 // Парсинг string в serial.Parity
 func parseParity(parity string) serial.Parity {
 	switch parity {
-	case "N":
+	case "NONE":
 		return serial.NoParity
-	case "E":
+	case "EVEN":
 		return serial.EvenParity
-	case "O":
+	case "ODD":
 		return serial.OddParity
-	case "M":
+	case "MARK":
 		return serial.MarkParity
-	case "S":
+	case "SPACE":
 		return serial.SpaceParity
 	default:
 		return serial.NoParity
@@ -152,6 +152,7 @@ func (r *Reader) close() {
 		r.port.Close()        // закрываем порт
 		defer close(r.Stream) // закрываем канал
 	}
+	fmt.Println("\033[32m✔\033[0m Процесс чтения остановлен.")
 }
 
 // reset – возвращает парсер в исходное состояние
@@ -165,14 +166,14 @@ func (r *Reader) reset() {
 	r.discreteOffset = 0
 	r.analogReady = false
 	r.discreteReady = false
-	fmt.Println("Выполнен сброс парсера")
+	fmt.Println("\033[32m✔\033[0m Выполнен сброс парсера")
 }
 
 // Run – основной цикл чтения
 func (r *Reader) Run(ctx context.Context) {
 
 	// создаем буфер для чтения порта
-	buf := make([]byte, bufferSize)
+	buf := make([]byte, readBufferSize)
 
 Loop: // Метка для цикла (для break внутри select)
 	// основной цикл чтения
@@ -188,7 +189,7 @@ Loop: // Метка для цикла (для break внутри select)
 			// ошибка чтения
 			if err != nil {
 				r.reset()
-				fmt.Printf("Ошибка чтения: %e", err)
+				fmt.Printf("\n\033[31m✖ Ошибка чтения: %e \033[0m", err)
 				break Loop
 			}
 
@@ -216,7 +217,7 @@ Loop: // Метка для цикла (для break внутри select)
 					}
 				case stateRecvAnalog:
 					if r.analogOffset+r.analogIndex >= totalAnalogSize {
-						fmt.Println("Переполненние аналогового блока")
+						fmt.Println("\n\033[31m✖ Переполненние аналогового блока\033[0m")
 						r.reset()
 						break Loop
 					}
@@ -226,7 +227,7 @@ Loop: // Метка для цикла (для break внутри select)
 						if r.analogMarker == 0xF6 {
 							vals, err := r.parseAnalogPack(r.analogData)
 							if err != nil {
-								fmt.Printf("Ошибка парсинга аналогового блока: %v", err)
+								fmt.Printf("\n\033[31m✖ Ошибка парсинга аналогового блока: %v\033[0m", err)
 								r.reset()
 								break Loop
 							}
@@ -237,7 +238,7 @@ Loop: // Метка для цикла (для break внутри select)
 					}
 				case stateRecvDiscrete:
 					if r.discreteOffset+r.discreteIndex >= totalDiscreteSize {
-						fmt.Println("Переполненние дискретного блока – СБРОС")
+						fmt.Println("\n\033[31m✖ Переполненние дискретного блока – СБРОС\033[0m")
 						r.reset()
 						break Loop
 					}
@@ -247,7 +248,7 @@ Loop: // Метка для цикла (для break внутри select)
 						if r.discreteMarker == 0xE1 {
 							bools, err := r.bytesToBools(r.discreteData)
 							if err != nil {
-								fmt.Printf("Ошибка парсинга дискретного блока: %v", err)
+								fmt.Printf("\n\033[31m✖ Ошибка парсинга дискретного блока: %v\033[0m", err)
 								r.reset()
 								break Loop
 							}
@@ -263,10 +264,10 @@ Loop: // Метка для цикла (для break внутри select)
 			if r.analogReady && r.discreteReady {
 
 				// --- пакетное сглаживание ---
-				for i := 0; i < analogChannels; i++ {
+				for i := 0; i < AnalogChannels; i++ {
 					r.acSums[i] += r.Frame.AnalogValues[i]
 				}
-				for i := 0; i < discreteChannels; i++ {
+				for i := 0; i < DiscreteChannels; i++ {
 					if r.Frame.DiscreteValues[i] {
 						r.dcSums[i]++
 					}
@@ -275,15 +276,15 @@ Loop: // Метка для цикла (для break внутри select)
 
 				if r.batchCount == r.bufferSize {
 					avg := Frame{
-						AnalogValues:   make([]int, analogChannels),
-						DiscreteValues: make([]bool, discreteChannels),
+						AnalogValues:   make([]int, AnalogChannels),
+						DiscreteValues: make([]bool, DiscreteChannels),
 					}
 
-					for i := 0; i < analogChannels; i++ {
+					for i := 0; i < AnalogChannels; i++ {
 						avg.AnalogValues[i] = r.acSums[i] / r.bufferSize
 					}
 
-					for i := 0; i < discreteChannels; i++ {
+					for i := 0; i < DiscreteChannels; i++ {
 						avg.DiscreteValues[i] = r.dcSums[i] > r.bufferSize/2 // строгое большинство
 					}
 
@@ -305,7 +306,6 @@ Loop: // Метка для цикла (для break внутри select)
 		}
 	}
 
-	fmt.Println("\nОстановка чтения.")
 	r.close()
 
 }
@@ -320,9 +320,9 @@ func (r *Reader) parseAnalogPack(buffer []byte) ([]int, error) {
 		return nil, fmt.Errorf("analog pack size mismatch")
 	}
 
-	values := make([]int, analogChannels)
+	values := make([]int, AnalogChannels)
 
-	for i := 0; i < analogChannels; i++ {
+	for i := 0; i < AnalogChannels; i++ {
 		hi := buffer[i*2]
 		lo := buffer[i*2+1]
 		values[i] = int(lo) | (int(hi&0x03) << 8)

@@ -4,99 +4,94 @@ import (
 	"errors"
 	"fmt"
 	"net"
+	"os"
 	"sort"
 	"strconv"
-	"strings"
 
 	"github.com/cqroot/prompt"
 	"go.bug.st/serial"
 )
 
 const (
-	emulationOption = "Emul"
 	defaultServerIP = "127.0.0.1"
 	defaultPort     = "9765"
 )
 
 // Config содержит параметры подключения.
-type Config struct {
-	Emulation  bool
-	SerialPort string
-	ServerIP   string
-	ServerPort int
+type AppConfig struct {
+	Emulation     bool
+	SerialPort    string
+	ServerAddress string
 }
 
-func Setup() (*Config, error) {
+func Setup() *AppConfig {
+
+	config := &AppConfig{}
+
 	fmt.Println("АО \"ЦС \"Звездочка\", Объект #160-161.")
 	fmt.Println("Сервер обработки данных УСО, версия 0.3.0")
-	fmt.Println("Разработчик Верещагин Павел Артемович, эл. почта: ipashu@gmail.com")
-	fmt.Println("")
+	fmt.Println("Павел Верещагин, эл. почта: ipashu@gmail.com")
+	fmt.Println()
 
 	// Получаем доступные порты.
 	ports, err := serial.GetPortsList()
 	if err != nil {
-		return nil, fmt.Errorf("get serial ports: %w", err)
+		fmt.Println("\033[31m✖ Ошибка при попытке получения списка портов.\033[0m")
+		os.Exit(1)
 	}
 
 	// Сортируем порты.
 	sort.Strings(ports)
 
-	// Добавляем режим эмуляции.
-	ports = append(ports, emulationOption)
-
 	p := prompt.New()
 
-	// Выбираем порт УСО или эмуляцию.
-	selectedPort, err := p.
-		Ask("Порт УСО:").
-		Choose(ports)
+	// Выбираем источник.
+	source, err := p.Ask("Источник данных:").Choose([]string{"УСО", "Эмулятор УСО"})
+	CheckErr(err)
 
-	if err != nil {
-		return nil, fmt.Errorf("select serial port: %w", err)
+	config.Emulation = source != "УСО"
+
+	if !config.Emulation {
+		// Выбираем порт УСО.
+		serialPort, err := p.Ask("Порт УСО:").Choose(ports)
+		CheckErr(err)
+		config.SerialPort = serialPort
 	}
-
-	emulation := selectedPort == emulationOption
 
 	// Настройка IP-адреса сервера.
-	serverIP, err := p.
-		Ask("IP-адрес сервера:").
-		Input(defaultServerIP)
-
-	if err != nil {
-		return nil, fmt.Errorf("input server IP: %w", err)
-	}
-
-	serverIP = strings.TrimSpace(serverIP)
+	serverIP, err := p.Ask("IP-адрес сервера:").Input(defaultServerIP)
+	CheckErr(err)
 
 	if net.ParseIP(serverIP) == nil {
-		return nil, errors.New("неправильный IP-адрес")
+		fmt.Println("\033[31m✖ Указан неправильный IP-адрес! \033[0m")
+		os.Exit(1)
 	}
 
 	// Настройка сетевого порта.
-	serverPortStr, err := p.
-		Ask("Порт сервера:").
-		Input(defaultPort)
+	serverPort, err := p.Ask("Порт сервера:").Input(defaultPort)
+	CheckErr(err)
 
+	portInt, _ := strconv.Atoi(serverPort) // Проверка на корректность номера порта
+
+	if portInt > 1 && portInt < 65535 {
+		config.ServerAddress = net.JoinHostPort(serverIP, serverPort) // Формируем адрес сервера.
+	} else {
+		fmt.Println("\033[31m✖ Указан неправильный порт сервера! \033[0m")
+		os.Exit(1)
+	}
+
+	return config
+
+}
+
+// Обработка ошибок prompt
+func CheckErr(err error) {
 	if err != nil {
-		return nil, fmt.Errorf("input server port: %w", err)
+		if errors.Is(err, prompt.ErrUserQuit) {
+			fmt.Fprintln(os.Stderr, "Error:", err)
+			os.Exit(1)
+		} else {
+			panic(err)
+		}
 	}
-
-	serverPort, err := strconv.Atoi(strings.TrimSpace(serverPortStr))
-	if err != nil || serverPort < 1 || serverPort > 65535 {
-		return nil, errors.New("порт должен быть от 1 до 65535")
-	}
-
-	// Формируем конфигурацию.
-	config := &Config{
-		Emulation:  emulation,
-		ServerIP:   serverIP,
-		ServerPort: serverPort,
-	}
-
-	// COM-порт нужен только в режиме чтения.
-	if !emulation {
-		config.SerialPort = selectedPort
-	}
-
-	return config, nil
 }

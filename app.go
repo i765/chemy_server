@@ -6,14 +6,10 @@ import (
 	"chemyserver/pkg/welcome"
 	"context"
 	"encoding/json"
-	"errors"
 	"fmt"
 	"io/fs"
-	"log"
-	"net"
 	"net/http"
 	"os"
-	"strconv"
 	"sync"
 	"time"
 )
@@ -50,12 +46,7 @@ func (a *App) run(ctx context.Context) {
 	a.ctx = ctx
 
 	// Получение конфигурации.
-	appConfig, err := welcome.Setup()
-
-	if err != nil {
-		fmt.Println(ErrorMark+" Ошибка настройки:", err)
-		os.Exit(1)
-	}
+	appConfig := welcome.Setup()
 
 	// Выбор режима работы.
 	if appConfig.Emulation {
@@ -66,23 +57,37 @@ func (a *App) run(ctx context.Context) {
 	} else {
 
 		// Запуск чтения УСО…
-		go a.startReadingProcess(appConfig.SerialPort)
+		go a.startReadingProcess(appConfig)
 
 	}
-
-	go a.startServerProcess(appConfig.ServerIP, appConfig.ServerPort)
+	// Запуск чтения сервера
+	go a.startServerProcess(appConfig.ServerAddress, ctx)
 
 	<-ctx.Done()
 
-	fmt.Println("Завершение работы приложения…")
-
-	time.Sleep(time.Second * 1)
+	fmt.Println("\n🔥 Завершение работы…")
+	time.Sleep(time.Second * 3)
 
 }
 
-func (a *App) startReadingProcess(seialPort string) {
+func (a *App) startReadingProcess(appConfig *welcome.AppConfig) {
 
-	r := reader.NewReader(seialPort, 19200, "N", 8)
+	baudRate := os.Getenv("BAUD")
+	if baudRate == "" {
+		baudRate = "19200" // значение по умолчанию
+	}
+
+	serialParity := os.Getenv("PARITY")
+	if serialParity == "" {
+		serialParity = "NONE" // значение по умолчанию
+	}
+
+	bufferSize := os.Getenv("BUFFERSIZE")
+	if bufferSize == "" {
+		bufferSize = "16" // значение по умолчанию
+	}
+
+	r := reader.NewReader(appConfig.SerialPort, baudRate, serialParity, bufferSize)
 
 	go r.Run(a.ctx)
 
@@ -93,7 +98,7 @@ func (a *App) startReadingProcess(seialPort string) {
 		a.mu.Unlock()
 	}
 
-	fmt.Println("Синхронизация потоков остановлена.")
+	fmt.Printf("\033[32m✔\033[0m %s освобожден.", appConfig.SerialPort)
 
 }
 
@@ -110,38 +115,57 @@ func (a *App) startEmulatorProcess() {
 		a.mu.Unlock()
 	}
 
-	fmt.Println("Синхронизация потоков остановлена.")
+	fmt.Println("\033[32m✔\033[0m Эмуляция остановлена.")
 
 }
 
-func (a *App) startServerProcess(ip string, port int) {
+func (a *App) startServerProcess(address string, ctx context.Context) {
+	// Подключаем фронтенд.
 	subFS, _ := fs.Sub(assets, "frontend/dist")
 
+	// Настраеваем маршрутизацию.
 	mux := http.NewServeMux()
 	mux.Handle("/", http.FileServerFS(subFS))
 	mux.HandleFunc("/config", configHandler(a.ChannelsConfig))
 	mux.HandleFunc("/frame", a.frameHandler)
 
-	// Формируем адрес сервера.
-	address := net.JoinHostPort(ip, strconv.Itoa(port))
-
-	// 1. Создаем сервер
+	// Создаем сервер.
 	srv := &http.Server{
 		Addr:    address,
 		Handler: enableCORS(mux),
 	}
 
-	fmt.Printf(CheckMark+" Сервер запущен на http://%s 🚀\n", address)
-
-	err := srv.ListenAndServe()
-
-	if err != nil && !errors.Is(err, http.ErrServerClosed) {
-		log.Printf("HTTP server error: %v", err)
+	// Ожидаение заполнения буфера.
+	for {
+		time.Sleep(50 * time.Millisecond)
+		if len(a.Frame.AnalogValues) == reader.AnalogChannels && len(a.Frame.DiscreteValues) == reader.DiscreteChannels {
+			fmt.Println("\r\033[32m✔\033[0m УСО готово.")
+			break
+		}
 	}
+
+	// Запускаем его в отдельном процессе.
+	go func() {
+		fmt.Printf("🚀 Сервер запущен на http://%s, Ctrl+C для остановки.", address)
+		// Здесь происходит блокирующая операция ListenAndServe.
+		if err := srv.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			fmt.Println("Ошибка сервера:", err)
+		}
+	}()
+
+	//Graceful Shutdown.
+
+	<-ctx.Done()
+
+	if err := srv.Shutdown(ctx); err != nil {
+		fmt.Printf("Сервер завершился с ошибкой при Shutdown: %v", err)
+	}
+
+	fmt.Println("\033[32m✔\033[0m Сервер успешно остановлен.")
 
 }
 
-// Отдаем JSON конфигурации
+// Отдаем JSON конфигурацию каналов
 func configHandler(data []byte) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
