@@ -4,21 +4,32 @@
   import { config } from "./config.svelte";
   import { sensors } from "./sensors.svelte";
 
-  $effect(()=>{
-    config.fetchNow()
+  let isReady = $state(false);
 
-    return sensors.startPolling(1000)
-  })
-  
+  $effect(() => {
+    if (config.error === null && sensors.error === null) {
+      if (config.isLoading && sensors.isLoading) {
+        console.log("Загрузка данных...");
+      } else {
+        console.log("Приложение готово к запуску.");
+        isReady = true;
+      }
+    } else {
+      console.error("Ошибка при получении данных!");
+      isReady = false;
+    }
+  });
 </script>
 
 <div class="spa-layout">
+  
   <SideBar />
 
   <div class="main-content">
-    
-    <AnalogSensors />
-
+    {#if isReady}
+      <AnalogSensors {config} />
+    {:else}
+      <p>Загрузка...</p>
+    {/if}
   </div>
-
 </div>

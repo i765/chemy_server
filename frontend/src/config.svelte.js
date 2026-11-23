@@ -1,5 +1,6 @@
 class Config {
-  items = $state([]);
+ 
+  data = $state([]);
   isLoading = $state(true);
   error = $state(null);
 
@@ -9,7 +10,7 @@ class Config {
       if (!response.ok) {
         throw new Error(`Ошибка HTTP: ${response.status}`);
       }
-      this.items = await response.json();
+      this.data = await response.json();
       this.error = null;
     } catch (err) {
       this.error = err.message;

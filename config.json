@@ -1,3478 +1,616 @@
 {
-  "analog_channels": [
+  "analog": [
+    {
+      "id": 0,
+      "name": "6TC101L02",
+      "desc": "Уровень в емкости TC101A",
+      "unit": "мм",
+      "max": 2000,
+      "min": 0,
+      "address": 33
+    },
     {
       "id": 1,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TC102F01",
+      "desc": "Расход воды в напорном трубопроводе насоса",
+      "unit": "м³/ч",
+      "max": 2,
+      "min": 0.113,
+      "address": 38
     },
     {
       "id": 2,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TC104L02",
+      "desc": "Уровень в емкости TC104A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 18
     },
     {
       "id": 3,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TC105F01",
+      "desc": "Расход воды в напорном трубопроводе насоса",
+      "unit": "м³/ч",
+      "max": 2.0,
+      "min": 0.113,
+      "address": 23
     },
     {
       "id": 4,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TC106L02",
+      "desc": "Уровень в емкости TC106A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 31
     },
     {
       "id": 5,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TG104P01",
+      "desc": "Разрежение в трубопроводе подачи газовоздушной смеси к вентилятору TG104A",
+      "unit": "кПа",
+      "max": 40.0,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 35
     },
     {
       "id": 6,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TG204P01",
+      "desc": "Разрежение в трубопроводе подачи к эжектору TG204A",
+      "unit": "кПа",
+      "max": 40.0,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 30
     },
     {
       "id": 7,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL101L02",
+      "desc": "Уровень в емкости TL101A",
+      "unit": "мм",
+      "max": 2000,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 2
     },
     {
       "id": 8,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL102L02",
+      "desc": "Уровень в емкости TL102A",
+      "unit": "мм",
+      "max": 2000,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 5
     },
     {
       "id": 9,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL103P01",
+      "desc": "Давление в напорном трубопроводе насоса",
+      "unit": "кПа",
+      "max": 6.3,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 11
     },
     {
       "id": 10,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL202F01",
+      "desc": "Расход подачи ЖРО в емкость TL202A",
+      "unit": "м³/ч",
+      "max": 1.0,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 103
     },
     {
       "id": 11,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL203F01",
+      "desc": "Расход подачи ЖРО в емкость TL203A",
+      "unit": "м³/ч",
+      "max": 1.0,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 102
     },
     {
       "id": 12,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL301L02",
+      "desc": "Уровень в емкости TL301A",
+      "unit": "мм",
+      "max": 2000,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 10
     },
     {
       "id": 13,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL401Q01",
+      "desc": "Концентрация озона после контактной колонны",
+      "unit": "г/м³",
+      "max": 5.0,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 98
     },
     {
       "id": 14,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL406F01",
+      "desc": "Расход подачи ЖРО в емкость TL406A",
+      "unit": "м³/ч",
+      "max": 1.0,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 101
     },
     {
       "id": 15,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL406P01",
+      "desc": "Перепад давления на фильтре TL406A",
+      "unit": "кПа",
+      "max": 160,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 1
     },
     {
       "id": 16,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL501F01",
+      "desc": "Расход подачи ЖРО в емкость TL501A",
+      "unit": "м³/ч",
+      "max": 1,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 99
     },
     {
       "id": 17,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL601L02",
+      "desc": "Уровень в емкости TL601A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 13
     },
     {
       "id": 18,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL602L02",
+      "desc": "Уровень в емкости TL602A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 3
     },
     {
       "id": 19,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL701F01",
+      "desc": "Расход подачи ЖРО в емкость TL701A",
+      "unit": "м³/ч",
+      "max": 1.0,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "MaxR":0.85,
+      "MaxY":0.65,
+      "address": 106
     },
     {
       "id": 20,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL801L02",
+      "desc": "Уровень в емкости TL801A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "MaxR":1500,
+      "MaxY":1200,
+      "address": 39
     },
     {
       "id": 21,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL802L02",
+      "desc": "Уровень в емкости TL802A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 36
     },
     {
       "id": 22,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TL901L02",
+      "desc": "Уровень в емкости TL901A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 37
     },
     {
       "id": 23,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TL902F01",
+      "desc": "Расход жидкости в аппарат TL903A",
+      "unit": "м³/ч",
+      "max": 0.3,
+      "min": 0.028,
+      "address": 34
     },
     {
       "id": 24,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TL904T01",
+      "desc": "Температура конденсата в трубопроводе отвода от TL904A",
+      "unit": "°C",
+      "max": 400,
+      "min": -50,
+      "address": 0
     },
     {
       "id": 25,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TW101L02",
+      "desc": "Уровень в емкости TW101A",
+      "unit": "мм",
+      "max": 2000,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 8
     },
     {
       "id": 26,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TW102L02",
+      "desc": "Уровень в емкости TW102A",
+      "unit": "мм",
+      "max": 2000,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 15
     },
     {
       "id": 27,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TW202F01",
+      "desc": "Расход жидкости из емкостей TW201A, TW102A",
+      "unit": "м³/ч",
+      "max": 2,
+      "min": 0.113,
+      "address": 4
     },
     {
       "id": 28,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TW213F01",
+      "desc": "Расход жидкости из отстойника TW201A",
+      "unit": "м³/ч",
+      "max": 2.0,
+      "min": 0.113,
+      "address": 9
     },
     {
       "id": 29,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TW405F01",
+      "desc": "Расход жидкости из емкости TW402A",
+      "unit": "м³/ч",
+      "max": 2.0,
+      "min": 0.113,
+      "address": 16
     },
     {
       "id": 30,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TW501Q01",
+      "desc": "Концентрация озона в ОВС после TW501A, TW505A",
+      "unit": "г/м³",
+      "max": 10,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 100
     },
     {
       "id": 31,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TW504Q01",
+      "desc": "Концентрация озона в ОВС после озонатора TW504A",
+      "unit": "г/м³",
+      "max": 50,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 97
     },
     {
       "id": 32,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TW602F01",
+      "desc": "Расход жидкости после фильтра TW602A",
+      "unit": "м³/ч",
+      "max": 2.0,
+      "min": 0.113,
+      "address": 6
     },
     {
       "id": 33,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TW701L02",
+      "desc": "Уровень в емкости TW701A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 14
     },
     {
       "id": 34,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6TW702L02",
+      "desc": "Уровень в емкости TW702A",
+      "unit": "мм",
+      "max": 1600,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 7
     },
     {
       "id": 35,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "6TW703F01",
+      "desc": "Расход жидкости из емкостей TW701A, TW702A",
+      "unit": "м³/ч",
+      "max": 8.0,
+      "min": 0.113,
+      "address": 26
     },
     {
       "id": 36,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "6WB000F01",
+      "desc": "Расход воздуха, выбрасываемого из здания 160/161",
+      "unit": "м³/ч",
+      "max": 75000,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 0
     },
     {
       "id": 37,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "TC301F01",
+      "desc": "Расход воды в ЦБЗ",
+      "unit": "л/ч",
+      "max": 250,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 25
     },
     {
       "id": 38,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "TL303F01",
+      "desc": "Расход фильтрата",
+      "unit": "л/ч",
+      "max": 1600,
+      "min": 160,
+      "address": 20
     },
     {
       "id": 39,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
+      "name": "TL303P01",
+      "desc": "Давление концентрата ЖРО",
+      "unit": "кг/см²",
       "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "min": 0,
+      "address": 29
     },
     {
       "id": 40,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "TL303Q01",
+      "desc": "Концентрация водорода в ЖРО",
+      "unit": "pH",
+      "max": 12,
+      "min": 2,
+      "address": 81
     },
     {
       "id": 41,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "TL303Q02Ж",
+      "desc": "Проводимость фильтрата",
+      "unit": "мСм/см",
+      "max": 199,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 22
     },
     {
       "id": 42,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "TL502F01",
+      "desc": "Расход ЖРО",
+      "unit": "л/ч",
+      "max": 250,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 27
     },
     {
       "id": 43,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "TL605F01",
+      "desc": "Расход фильтрата",
+      "unit": "л/ч",
+      "max": 1600,
+      "min": 160,
+      "address": 24
     },
     {
       "id": 44,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
+      "name": "TL605P01",
+      "desc": "Давление концентрата ЖРО",
+      "unit": "кг/см²",
       "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "min": 0,
+      "address": 21
     },
     {
       "id": 45,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "TL605Q01",
+      "desc": "Концентрация водорода",
+      "unit": "pH",
+      "max": 12,
+      "min": 2,
+      "address": 82
     },
     {
       "id": 46,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "TL605Q02",
+      "desc": "Проводимость фильтрата",
+      "unit": "мСм/см",
+      "max": 199,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 19
     },
     {
       "id": 47,
-      "name": "",
-      "description": "",
-      "unit": "%",
+      "name": "TW204L01",
+      "desc": "Уровень воды в осадкоуплотнителе 1",
+      "unit": "мм",
+      "max": 500,
       "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "address": 28
     },
     {
       "id": 48,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 49,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 50,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 51,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 52,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 53,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 54,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 55,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 56,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 57,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 58,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 59,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 60,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 61,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 62,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 63,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 64,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 65,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 66,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 67,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 68,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 69,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 70,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 71,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 72,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 73,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 74,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 75,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 76,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 77,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 78,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 79,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 80,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 81,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 82,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 83,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 84,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 85,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 86,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 87,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 88,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 89,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 90,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 91,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 92,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 93,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 94,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 95,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 96,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 97,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 98,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 99,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 100,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 101,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 102,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 103,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 104,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 105,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 106,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 107,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 108,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 109,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 110,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 111,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
-    },
-    {
-      "id": 112,
-      "name": "",
-      "description": "",
-      "unit": "%",
-      "min": 0,
-      "max": 100,
-      "factor": 1,
-      "offset": 0,
-      "enabled": false
+      "name": "TW205L01",
+      "desc": "Уровень воды в осадкоуплотнителе 2",
+      "unit": "мм",
+      "max": 500,
+      "min": 0,
+      "address": 17
     }
   ],
-  "discrete_channels": [
-    {
-      "id": 1,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 2,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 3,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 4,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 5,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 6,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 7,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 8,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 9,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 10,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 11,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 12,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 13,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 14,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 15,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 16,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 17,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 18,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 19,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 20,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 21,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 22,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 23,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 24,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 25,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 26,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 27,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 28,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 29,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 30,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 31,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 32,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 33,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 34,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 35,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 36,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 37,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 38,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 39,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 40,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 41,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 42,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 43,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 44,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 45,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 46,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 47,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 48,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
+  "calc": [
+    { 
       "id": 49,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 0,
+      "name": "v6TC101L02",
+      "desc": "Объем в емкости TC101A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.00288,
+      "offset": 0.07
     },
-    {
+    { 
       "id": 50,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 2,
+      "name": "v6TC104L02",
+      "desc": "Объем в емкости TC104A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.00203,
+      "offset": 0
     },
-    {
+    { 
       "id": 51,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 4,
+      "name": "v6TC106L02",
+      "desc": "Объем в емкости TC106A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.0038,
+      "offset": 0.37
     },
-    {
+    { 
       "id": 52,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 7,
+      "name": "v6TL101L02",
+      "desc": "Объем в емкости TL101A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.00288,
+      "offset": 0.07
     },
-    {
+    { 
       "id": 53,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 8,
+      "name": "v6TL102L02",
+      "desc": "Объем в емкости TL102A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.00317,
+      "offset": 0.07
     },
-    {
+    { 
       "id": 54,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 12,
+      "name": "v6TL301L02",
+      "desc": "Объем в емкости TL301A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.00288,
+      "offset": 0.07
     },
-    {
+    { 
       "id": 55,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 17,
+      "name": "v6TL601L02",
+      "desc": "Объем в емкости TL601A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.0038,
+      "offset": 0.4
     },
-    {
+    { 
       "id": 56,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 18,
+      "name": "v6TL602L02",
+      "desc": "Объем в емкости TL602A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.0038,
+      "offset": 0.4
     },
-    {
+    { 
       "id": 57,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 20,
+      "name": "v6TL801L02",
+      "desc": "Объем в емкости TL801A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.0038,
+      "offset": 0.4
     },
-    {
+    { 
       "id": 58,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 21,
+      "name": "v6TL802L02",
+      "desc": "Объем в емкости TL802A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.0038,
+      "offset": 0.4
     },
-    {
+    { 
       "id": 59,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 22,
+      "name": "v6TL901L02",
+      "desc": "Объем в емкости TL901A",
+      "unit": "м³",
+      "max": 2,
+      "min": 0,
+      "factor": 0.00125,
+      "offset": 0.2
     },
-    {
+    { 
       "id": 60,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 25,
+      "name": "v6TW101L02",
+      "desc": "Объем в емкости TW101A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.00288,
+      "offset": 0.07
     },
-    {
+    { 
       "id": 61,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 26,
+      "name": "v6TW102L02",
+      "desc": "Объем в емкости TW102A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.00288,
+      "offset": 0.07
     },
-    {
+    { 
       "id": 62,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 33,
+      "name": "v6TW701L02",
+      "desc": "Объем в емкости TW701A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.0038,
+      "offset": 0.4
     },
-    {
+    { 
       "id": 63,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 64,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 65,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 66,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 67,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 68,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 69,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 70,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 71,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 72,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 73,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 74,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 75,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 76,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 77,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 78,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 79,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 80,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 81,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 82,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 83,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 84,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 85,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 86,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 87,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 88,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 89,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 90,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 91,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 92,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 93,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 94,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 95,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 96,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 97,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 98,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 99,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 100,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 101,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 102,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 103,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 104,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 105,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 106,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 107,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 108,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 109,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 110,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 111,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 112,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 113,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 114,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 115,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 116,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 117,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 118,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 119,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 120,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 121,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 122,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 123,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 124,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 125,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 126,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 127,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 128,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 129,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 130,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 131,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 132,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 133,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 134,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 135,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 136,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 137,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 138,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 139,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 140,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 141,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 142,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 143,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 144,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 145,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 146,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 147,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 148,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 149,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 150,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 151,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 152,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 153,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 154,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 155,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 156,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 157,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 158,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 159,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 160,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 161,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 162,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 163,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 164,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 165,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 166,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 167,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 168,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 169,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 170,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 171,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 172,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 173,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 174,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 175,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 176,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 177,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 178,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 179,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 180,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 181,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 182,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 183,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 184,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 185,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 186,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 187,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 188,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 189,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 190,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 191,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 192,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 193,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 194,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 195,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 196,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 197,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 198,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 199,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 200,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 201,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 202,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 203,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 204,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 205,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 206,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 207,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 208,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 209,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 210,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 211,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 212,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 213,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 214,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 215,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 216,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 217,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 218,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 219,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 220,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 221,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 222,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 223,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 224,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 225,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 226,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 227,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 228,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 229,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 230,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 231,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 232,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 233,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 234,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 235,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 236,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 237,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 238,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 239,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 240,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 241,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 242,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 243,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 244,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 245,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 246,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 247,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 248,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 249,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 250,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 251,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 252,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 253,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 254,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 255,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 256,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 257,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 258,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 259,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 260,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 261,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 262,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 263,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 264,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 265,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 266,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 267,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 268,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 269,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 270,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 271,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 272,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 273,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 274,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 275,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 276,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 277,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 278,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 279,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 280,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 281,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 282,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 283,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 284,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 285,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 286,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 287,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 288,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 289,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 290,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 291,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 292,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 293,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 294,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 295,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 296,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 297,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 298,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 299,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 300,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 301,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 302,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 303,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 304,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 305,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 306,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 307,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 308,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 309,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 310,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 311,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 312,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 313,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 314,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 315,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 316,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 317,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 318,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 319,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
-    },
-    {
-      "id": 320,
-      "name": "",
-      "description": "",
-      "inverted": false,
-      "enabled": false
+      "channel": 34,
+      "name": "v6TW702L02",
+      "desc": "Объем в емкости TW702A",
+      "unit": "м³",
+      "max": 6,
+      "min": 0,
+      "factor": 0.0038,
+      "offset": 0.4
     }
   ]
 }
