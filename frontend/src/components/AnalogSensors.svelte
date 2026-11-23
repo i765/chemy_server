@@ -2,6 +2,7 @@
   import AnalogSensorItem from "./AnalogSensorItem.svelte";
   import { sensors } from "../sensors.svelte";
   import { config } from "../config.svelte";
+  
 </script>
 
 <div class="div-table">
