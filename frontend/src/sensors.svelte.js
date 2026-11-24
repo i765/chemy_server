@@ -1,20 +1,18 @@
 import { config } from "./config.svelte";
 
 class Sensors {
-
   // Глобальное реактивное состояние
   data = $state([]); // сырые данные с ацп (аналоговые и дискретные)
+  analog = $state([]);
   isLoading = $state(true);
   error = $state(null);
-
-  analog = $state([]);
 
   #timerId = null;
   #subscribers = 0;
 
   async fetchNow() {
     try {
-      const response = await fetch('http://127.0.0.1:9765/frame');
+      const response = await fetch("http://127.0.0.1:9765/frame");
       if (!response.ok) {
         throw new Error(`Ошибка HTTP: ${response.status}`);
       }
@@ -24,7 +22,7 @@ class Sensors {
       this.error = err.message;
     } finally {
       this.isLoading = false;
-      this.convertAnalogChannels()
+      this.ConvertAnalog();
     }
   }
 
@@ -43,55 +41,59 @@ class Sensors {
         clearInterval(this.timerId);
         this.timerId = null;
       }
-    }
+    };
   }
 
-  convertAnalogChannels(){
+  // сортировка и линейное преобразование
+  ConvertAnalog() {
     for (let i = 0; i < config.data.analog.length; i++) {
-       this.analog[i] = linearConvertAC(
+      
+      this.analog[i] = linearConvertAC(
         this.data.analogValues[i],
-        config.data.analog[i]
-      )
+        config.data.analog[i].min,
+        config.data.analog[i].max,
+      );
+      
     }
 
   }
-
+  
 }
 
 // преобразование сигнала АЦП в диапазон шкалы измеряемого канала
-function linearConvertAC(value = 0, min = 0, max = 0) {
-  const round = roundFromRange(min, max)
-  const dacMax = 1023
+function linearConvertAC(value = 0, min = 0, max = 1) {
+  const round = roundFromRange(min, max);
+  const dacMax = 1023;
 
   if (value <= 0) {
-    return min
+    return min;
   }
 
   if (value >= dacMax) {
-    return max
+    return max;
   }
 
-  const converted = min + ((max - min) * value) / dacMax // преобразуем
+  const converted = min + ((max - min) * value) / dacMax; // преобразуем
 
-  return roundWithPrecision(converted, round)
+  return roundWithPrecision(converted, round);
 }
 
 // определение количества знаков после запятой
 function roundFromRange(min = 0, max = 0) {
-  let round = 2
-  let range = max - min
+  let round = 2;
+  let range = max - min;
   if (range >= 1000) {
-    round = 0
+    round = 0;
   } else if (range >= 100) {
-    round = 1
+    round = 1;
   }
-  return round
+  return round;
 }
 
 // корректное округление до заданного количества знаков
 function roundWithPrecision(num, precision) {
-  var multiplier = Math.pow(10, precision)
-  return Math.round(num * multiplier) / multiplier
+  var multiplier = Math.pow(10, precision);
+  return Math.round(num * multiplier) / multiplier;
 }
 
 export const sensors = new Sensors();

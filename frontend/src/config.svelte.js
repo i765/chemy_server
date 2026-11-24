@@ -18,7 +18,6 @@ class Config {
       this.isLoading = false;
     }
   }
-
 }
 
 export const config = new Config();

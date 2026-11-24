@@ -29,7 +29,14 @@
     {#if isReady}
       <AnalogSensors {config} />
     {:else}
-      <p>Загрузка...</p>
+      <div class="loader">Подключение к УСО...</div>
     {/if}
   </div>
 </div>
+
+<style>
+  .loader{
+    padding: 30px;
+    font-weight: 600;
+  }
+</style>

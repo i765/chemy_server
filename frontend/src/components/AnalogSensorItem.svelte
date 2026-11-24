@@ -1,21 +1,53 @@
 <script>
   import ProgressBar from "./ProgressBar.svelte";
-  let { item, sensors } = $props();
-
-  let value =  $derived(sensors.analog[item.id])
   
+  let { item, sensors } = $props();
+  let value = $derived(sensors.analog[item.id]);
+
 </script>
 
-<div class="div-cell id">{item.name}</div>
-<div class="div-cell bar"><ProgressBar {item}{value}/></div>
-<div class="div-cell">{value}</div>
-<div class="div-cell">{item.desc}</div>
+<div class="grid-row">
+  <div class="div-cell name">{item.name}</div>
+  <div class="div-cell bar"><ProgressBar {item} {value} /></div>
+  <div class="div-cell value" title="{item.min} - {item.max} {item.unit}">
+    {value}
+    {item.unit}
+  </div>
+  <div class="div-cell desc">
+    {item.desc} ({item.min} - {item.max}
+    {item.unit})
+  </div>
+</div>
 
 <style>
-  .div-cell {
-    border-bottom: 1px solid #aaaaaa;
+  .grid-row {
+    display: grid;
+    grid-column: 1 / -1; /* Растягиваем строку на все 4 колонки */
+    grid-template-columns: subgrid; /* Наследуем размеры колонок от .grid-table */
+    border-radius: 8px;
   }
-  .bar{
+  .grid-row:hover {
+    background-color: #f5f5f5;
+  }
+  .div-cell {
+    /* border-bottom: 1px solid var(--border-color); */
+    white-space: nowrap;
+    overflow-x: hidden;
+    cursor: default;
+  }
+  .name {
+    font-weight: 300;
+    padding-left: 8px;
+  }
+  .bar {
     position: relative;
+  }
+  .value {
+    padding-left: 10px;
+    font-weight: 500;
+  }
+  .desc {
+    text-overflow: ellipsis;
+    padding-right: 5px;
   }
 </style>

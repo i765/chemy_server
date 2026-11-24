@@ -107,18 +107,27 @@
 
 <style>
   .sidebar {
+    --sidebar-bg: #fafafa;
+    --sidebar-text: var(--main-text);
+    --line-color: #cccccc;
+
+    --item-hover-text: #222;
+    --item-hover-bg: #f0f0f0;
+    --item-active-text: #ffffff;
+    --item-active-bg: #0077ff;
+
     background-color: var(--sidebar-bg);
     color: var(--sidebar-text);
-    margin: 10px;
-    padding: 10px;
+    margin: 12px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
-    border-radius: 20px;
+    border-radius:15px;
   }
 
   .sidebar-tree {
     max-width: 300px;
-    padding: 0 10px;
+    padding: 0 12px;
   }
 
   .sidebar-tree ul {
@@ -130,14 +139,13 @@
     align-items: center;
     width: 100%;
     padding: 10px 14px;
-    color: var(--sidebar-text);
     background: none;
     border: none;
-    font-size: 15px;
-    font-weight: 500;
     text-align: left;
     cursor: pointer;
     font-family: inherit;
+    font-weight: 500;
+    
   }
 
   /* Стрелка-шеврон — отдельный элемент, анимируем transform */
@@ -165,22 +173,23 @@
     display: flex;
     align-items: center;
     margin: 5px 0;
-    padding: 6px 13px;
-    font-size: 14px;
-    color: #333333;
-    font-weight: 400;
+    padding: 6px 15px;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    color: var(--sidebar-text);
+    font-weight: 300;
   }
 
   .tree-child:hover {
-    background-color: var(--line-color);
-    color: #fff;
+    background-color: var(--item-hover-bg);
+    color: var(--item-hover-text);
   }
 
   .tree-child.active {
-    background-color: var(--line-color);
-    color: #fff;
+    background-color: var(--item-active-bg);
+    color: var(--item-active-text);
+    font-weight: 500;
+    padding-left: 20px;
   }
 
 </style>

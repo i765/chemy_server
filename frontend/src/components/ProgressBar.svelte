@@ -30,7 +30,7 @@
 
 </script>
 
-<div class="progress-bar-container {barColorClass}">
+<div class="progress-bar-container {barColorClass}" title="{percentage} %">
     <div 
       class="progress-bar-fill {barColorClass}"
       style="width: {percentage}%"
@@ -39,31 +39,37 @@
 
 <style>
   .progress-bar-container {
-    margin: 5px 0;
+    --main-color: #23a517;
+    --warning-color: #ffd900;
+    --alarm-color: #ff0000;
+
+    margin: 6px 0;
     position: absolute;
     inset: 0;
     overflow: hidden;
-    background-color: #cccccc;
+    /* background-color: #eeeeee; */
+    border-radius: 4px;
+    border: 1px solid var(--main-color);
   }
 
   .progress-bar-fill {
     height: 100%;
-    background-color: #31ac0b;
+    background-color: var(--main-color);
     mask-repeat: repeat-x;
   }
 
-  .progress-bar-container.warning-low, .progress-bar-container.warning-high {
-    border-color: #ffd900
+  .warning-low, .warning-high {
+    border-color: var(--warning-color)
   }
-  .progress-bar-container.alarm-low, .progress-bar-container.alarm-high {
-    border-color: #ff0000
+  .alarm-low, .alarm-high {
+    border-color: var(--alarm-color)
   }
 
-  .progress-bar-fill.warning-low, .progress-bar-fill.warning-high {
-    background-color: #ffd900
+  .warning-low, .warning-high {
+    background-color: var(--warning-color)
   }
-  .progress-bar-fill.alarm-low, .progress-bar-fill.alarm-high {
-    background-color: #ff0000
+  .alarm-low, .alarm-high {
+    background-color: var(--alarm-color)
   }
 
 </style>

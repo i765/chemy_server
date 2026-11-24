@@ -14,9 +14,9 @@
 <style>
   .div-table {
     display: grid;
-    grid-template-columns: 120px 150px 150px 1fr;
-    border-top: 1px solid #ccc;
+    grid-template-columns: 110px 85px 125px 1fr;
     width: 100%;
+    line-height: 1.65;
   }
 
 </style>
