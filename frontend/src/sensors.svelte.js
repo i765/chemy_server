@@ -2,8 +2,8 @@ import { config } from "./config.svelte";
 
 class Sensors {
   // Глобальное реактивное состояние
-  data = $state([]); // сырые данные с ацп (аналоговые и дискретные)
-  analog = $state([]);
+  data = $state([]); // сырые данные с УСО (аналоговые и дискретные)
+  analog = $state([]); // Преобразованные аналоговые данные
   isLoading = $state(true);
   error = $state(null);
 
@@ -27,7 +27,7 @@ class Sensors {
   }
 
   startPolling(intervalMs = 1000) {
-    // Запускаем таймер только если он еще не работает
+    // Запускаем интервал только если он еще не работает
     if (!this.timerId) {
       this.fetchNow(); // Первый запрос делаем сразу без задержки
       this.timerId = setInterval(() => {
@@ -46,16 +46,16 @@ class Sensors {
 
   // сортировка и линейное преобразование
   ConvertAnalog() {
+    const channelOffset = 1 // Смещение индексов каналов
     for (let i = 0; i < config.data.analog.length; i++) {
-      
+      const address = config.data.analog[i].address + channelOffset // Адресация
       this.analog[i] = linearConvertAC(
-        this.data.analogValues[i],
+        this.data.analogValues[address], // Адресация 
         config.data.analog[i].min,
         config.data.analog[i].max,
       );
       
     }
-
   }
   
 }

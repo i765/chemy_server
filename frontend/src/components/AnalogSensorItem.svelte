@@ -1,8 +1,8 @@
 <script>
   import ProgressBar from "./ProgressBar.svelte";
   
-  let { item, sensors } = $props();
-  let value = $derived(sensors.analog[item.id]);
+  let { item, value } = $props();
+
 
 </script>
 

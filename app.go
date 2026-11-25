@@ -31,7 +31,7 @@ func NewApp() *App {
 	configData, err := os.ReadFile("config.json")
 
 	if err != nil {
-		fmt.Println(ErrorMark+" Ошибка чтения конфигурации:", err)
+		fmt.Println("\033[31m✖\033[0m Ошибка чтения конфигурации:", err)
 		os.Exit(1)
 	}
 
@@ -42,6 +42,8 @@ func NewApp() *App {
 }
 
 func (a *App) run(ctx context.Context) {
+
+	fmt.Printf("\x1b]0;%s\x07", "ChemyServer")
 
 	a.ctx = ctx
 
@@ -74,17 +76,17 @@ func (a *App) startReadingProcess(appConfig *welcome.AppConfig) {
 
 	baudRate := os.Getenv("BAUD")
 	if baudRate == "" {
-		baudRate = "19200" // значение по умолчанию
+		baudRate = "19200" // значение по умолчанию baudRate
 	}
 
 	serialParity := os.Getenv("PARITY")
 	if serialParity == "" {
-		serialParity = "NONE" // значение по умолчанию
+		serialParity = "NONE" // значение по умолчанию serialParity
 	}
 
 	bufferSize := os.Getenv("BUFFERSIZE")
 	if bufferSize == "" {
-		bufferSize = "16" // значение по умолчанию
+		bufferSize = "16" // значение по умолчанию bufferSize
 	}
 
 	r := reader.NewReader(appConfig.SerialPort, baudRate, serialParity, bufferSize)

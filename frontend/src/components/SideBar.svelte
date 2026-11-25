@@ -1,12 +1,11 @@
 <script>
-  import { createEventDispatcher } from 'svelte';
-
-  // Данные меню. Можно передать снаружи через `items`.
-  export let items = [
+import { slide } from 'svelte/transition';
+import { linear } from 'svelte/easing';
+  let items = [
     {
       id: 'analog',
       label: 'Аналоговые',
-      open: true,
+      open: false,
       children: [
         { id: 'linear', label: 'Линейные', href: '#linear' },
         { id: 'calc',   label: 'Вычисляемые', href: '#calc' },
@@ -39,14 +38,16 @@
     },
   ];
 
-  // Активный пункт (можно задать снаружи)
-  export let activeId = null;
+  let activeId = $state(null)  // Активный пункт
+  let openStates = $state({});  // Состояние открытых разделов
 
-  // Диспетчер — через него состояние экспортируется наружу
-  const dispatch = createEventDispatcher();
+  $effect(() => {
+    activeId = localStorage.getItem('active') ?? 'linear'
+    openStates = JSON.parse(localStorage.getItem('openStates')) ?? {}
+  });
 
-  // Состояние открытых разделов (инициализируем из данных)
-  let openStates = {};
+
+
   items.forEach((item) => {
     openStates[item.id] = item.open ?? false;
   });
@@ -54,20 +55,19 @@
   // Открыть / закрыть раздел
   function toggle(id) {
     openStates = { ...openStates, [id]: !openStates[id] };
-    dispatch('toggle', { id, open: openStates[id] });
-    dispatch('change', { openStates, activeId });
+    localStorage.setItem('openStates', JSON.stringify(openStates))
   }
 
   // Сделать пункт активным
   function activate(id) {
     activeId = id;
-    dispatch('activate', { id });
-    dispatch('change', { openStates, activeId });
+    localStorage.setItem('active', id)
   }
 </script>
 
 <aside class="sidebar">
-  <nav class="sidebar-tree" aria-label="Навигация по разделам">
+
+  <nav class="sidebar-tree">
     <ul>
       {#each items as item (item.id)}
         <li class="tree-item">
@@ -77,21 +77,21 @@
             class:open={openStates[item.id]}
             aria-expanded={openStates[item.id]}
             aria-controls={item.id}
-            on:click={() => toggle(item.id)}
+            onclick={() => toggle(item.id)}
           >
             {item.label}
-            <span class="chevron" aria-hidden="true"></span>
+            <span class="chevron"></span>
           </button>
 
           {#if openStates[item.id]}
-            <ul id={item.id} class="tree-children">
+            <ul id={item.id} class="tree-children" transition:slide={{ duration: 200, easing: linear }}>
               {#each item.children as child (child.id)}
                 <li>
                   <a
                     href={child.href ?? '#'}
                     class="tree-child"
                     class:active={activeId === child.id}
-                    on:click={() => activate(child.id)}
+                    onclick={() => activate(child.id)}
                   >
                     {child.label}
                   </a>
@@ -103,77 +103,84 @@
       {/each}
     </ul>
   </nav>
+
+  
+
+
 </aside>
 
 <style>
   .sidebar {
     --sidebar-bg: #fafafa;
     --sidebar-text: var(--main-text);
-    --line-color: #cccccc;
+    --chevron-color: #999;
 
     --item-hover-text: #222;
-    --item-hover-bg: #f0f0f0;
-    --item-active-text: #ffffff;
-    --item-active-bg: #0077ff;
+    --item-hover-bg: #e5e5e5;
+    --item-active-text: #111;
+    --item-active-bg: #eee;
 
     background-color: var(--sidebar-bg);
     color: var(--sidebar-text);
     margin: 12px;
-    padding: 12px;
+    padding: 12px 6px;
     display: flex;
     flex-direction: column;
-    border-radius:15px;
+    border-radius:20px;
   }
 
   .sidebar-tree {
-    max-width: 300px;
     padding: 0 12px;
   }
 
   .sidebar-tree ul {
     list-style: none;
   }
-  /* Родительские пункты — теперь это button (доступность + клик) */
+
   .tree-parent {
     display: flex;
     align-items: center;
     width: 100%;
-    padding: 10px 14px;
+    padding: 10px;
     background: none;
     border: none;
     text-align: left;
     cursor: pointer;
     font-family: inherit;
     font-weight: 500;
-    
   }
 
-  /* Стрелка-шеврон — отдельный элемент, анимируем transform */
   .tree-parent .chevron {
     margin-left: auto;
     width: 8px;
     height: 8px;
-    border-right: 2px solid var(--line-color);
-    border-bottom: 2px solid var(--line-color);
-    transition: transform .2s ease;
-    transform: rotate(45deg);
+    border-right: 2px solid var(--chevron-color);
+    border-bottom: 2px solid var(--chevron-color);
+    transform: rotate(-45deg);
+    transition: transform 200ms linear, opacity 200ms linear;
+    opacity: 0.5;
   }
 
   .tree-parent.open .chevron {
-    transform: rotate(-135deg);
+    transform: rotate(45deg);
   }
+
+  .tree-parent:hover .chevron{
+    opacity: 1;
+  }
+
 
   /* Дочерние пункты */
   .tree-children {
     padding-left: 16px;
-    border-left: 1px dashed var(--line-color);
+    
   }
 
   .tree-child {
     display: flex;
     align-items: center;
     margin: 5px 0;
-    padding: 6px 15px;
+    padding: 8px 15px;
     text-decoration: none;
     border-radius: 8px;
     color: var(--sidebar-text);
@@ -183,13 +190,15 @@
   .tree-child:hover {
     background-color: var(--item-hover-bg);
     color: var(--item-hover-text);
+    transition: background-color 250ms ease-out;
   }
 
   .tree-child.active {
     background-color: var(--item-active-bg);
     color: var(--item-active-text);
-    font-weight: 500;
-    padding-left: 20px;
+    font-weight: 400;
+    transition: background-color 250ms ease-out;
+
   }
 
 </style>

@@ -2,12 +2,13 @@
   import AnalogSensorItem from "./AnalogSensorItem.svelte";
   import { sensors } from "../sensors.svelte";
   import { config } from "../config.svelte";
+
   
 </script>
 
 <div class="div-table">
   {#each config.data.analog as item}
-    <AnalogSensorItem {item} {sensors} />
+    <AnalogSensorItem {item} value={sensors.analog[item.id]} />
   {/each}
 </div>
 

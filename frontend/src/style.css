@@ -35,6 +35,6 @@ body {
 }
 
 .main-content {
-    padding-top: 15px;
+    padding: 20px 0;
     overflow-y: auto;
 }

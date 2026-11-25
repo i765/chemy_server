@@ -2,73 +2,55 @@
 
   let {
     item = {},
-    
-    warnL = item.MinY ?? 0,
-    warnH = item.MaxY ?? 0,
-    alarmL = item.MinR ?? 0,
-    alarmH = item.MaxR ?? 0,
-    warnLowEnable = item.MinY ? true : false,
-    warnHighEnable = item.MaxY ? true : false,
-    alarmLowEnable = item.MinR ? true : false,
-    alarmHighEnable = item.MaxR ? true : false,
-
-    value = item.value ?? 0
+    warning = false,
+    alarm = false,
+    value = 0
   } = $props();
 
   let min = $derived(item.min);
   let max = $derived(item.max);
+
   let percentage = $derived((max - min) === 0 ? 0 : ((value - min) / (max - min)) * 100);
 
-  // реактивный класс для индикатора
-  let barColorClass = $derived(
-    (alarmLowEnable && value < alarmL) ? 'alarm-low'
-    : (alarmHighEnable && value > alarmH) ? 'alarm-high'
-    : (warnLowEnable && value < warnL) ? 'warning-low'
-    : (warnHighEnable && value > warnH) ? 'warning-high'
-    : ''
-  );
+  let status = $derived(warning ? (alarm ? 'alarm' : 'warning') : '')
 
 </script>
 
-<div class="progress-bar-container {barColorClass}" title="{percentage} %">
+<div class="progress-bar-container {status}" title="{percentage} %">
     <div 
-      class="progress-bar-fill {barColorClass}"
+      class="progress-bar-fill {status}"
       style="width: {percentage}%"
     ></div>
 </div>
 
 <style>
   .progress-bar-container {
-    --main-color: #23a517;
+    --main-color: #999999;
     --warning-color: #ffd900;
     --alarm-color: #ff0000;
-
     margin: 6px 0;
     position: absolute;
     inset: 0;
     overflow: hidden;
-    /* background-color: #eeeeee; */
-    border-radius: 4px;
+    border-radius: 3px;
     border: 1px solid var(--main-color);
   }
 
   .progress-bar-fill {
     height: 100%;
     background-color: var(--main-color);
-    mask-repeat: repeat-x;
   }
 
-  .warning-low, .warning-high {
-    border-color: var(--warning-color)
+  .progress-bar-container.warning{
+    border-color: var(--warning-color);
   }
-  .alarm-low, .alarm-high {
-    border-color: var(--alarm-color)
-  }
-
-  .warning-low, .warning-high {
+  .progress-bar-fill.warning {
     background-color: var(--warning-color)
   }
-  .alarm-low, .alarm-high {
+  .progress-bar-container.alarm{
+    border-color: var(--alarm-color);
+  }
+  .progress-bar-fill.alarm {
     background-color: var(--alarm-color)
   }
 
