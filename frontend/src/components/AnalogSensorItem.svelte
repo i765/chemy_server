@@ -2,11 +2,11 @@
   import ProgressBar from "./ProgressBar.svelte";
   
   let { item, value } = $props();
-
-
+  let selected = $state(false)
+  
 </script>
 
-<div class="grid-row">
+<div class="grid-row" class:selected={selected} onclick={()=>selected=!selected} >
   <div class="div-cell name">{item.name}</div>
   <div class="div-cell bar"><ProgressBar {item} {value} /></div>
   <div class="div-cell value" title="{item.min} - {item.max} {item.unit}">
@@ -25,15 +25,18 @@
     grid-column: 1 / -1; /* Растягиваем строку на все 4 колонки */
     grid-template-columns: subgrid; /* Наследуем размеры колонок от .grid-table */
     border-radius: 8px;
+    cursor: pointer;
   }
-  .grid-row:hover {
+  .grid-row:not(.selected):hover {
     background-color: #f5f5f5;
+  }
+  .selected{
+    background-color: #eee;
   }
   .div-cell {
     /* border-bottom: 1px solid var(--border-color); */
     white-space: nowrap;
     overflow-x: hidden;
-    cursor: default;
   }
   .name {
     font-weight: 300;

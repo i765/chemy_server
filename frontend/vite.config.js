@@ -1,7 +1,18 @@
-import { svelte } from '@sveltejs/vite-plugin-svelte'
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vite';
+import { svelte } from '@sveltejs/vite-plugin-svelte';
 
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [svelte()],
-})
+	plugins: [
+		svelte({
+			compilerOptions: {
+				warningFilter: (warning) => {
+					const ignored = [
+						'a11y_click_events_have_key_events',
+						'a11y_no_static_element_interactions'
+					];
+					return !ignored.includes(warning.code);
+				}
+			}
+		})
+	]
+});

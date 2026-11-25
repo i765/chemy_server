@@ -137,6 +137,7 @@ import { linear } from 'svelte/easing';
     list-style: none;
   }
 
+
   .tree-parent {
     display: flex;
     align-items: center;
@@ -148,7 +149,14 @@ import { linear } from 'svelte/easing';
     cursor: pointer;
     font-family: inherit;
     font-weight: 500;
+    transition: transform 200ms linear, opacity 200ms linear;
+    opacity: 0.6;
   }
+
+  .tree-parent:hover{
+    opacity: 1;
+  }
+
 
   .tree-parent .chevron {
     margin-left: auto;
@@ -157,8 +165,7 @@ import { linear } from 'svelte/easing';
     border-right: 2px solid var(--chevron-color);
     border-bottom: 2px solid var(--chevron-color);
     transform: rotate(-45deg);
-    transition: transform 200ms linear, opacity 200ms linear;
-    opacity: 0.5;
+    transition: transform 200ms linear;
   }
 
   .tree-parent.open .chevron {

@@ -21,8 +21,12 @@ class Sensors {
     } catch (err) {
       this.error = err.message;
     } finally {
-      this.isLoading = false;
-      this.ConvertAnalog();
+      if (this.error === null) {
+        this.isLoading = false;
+        this.ConvertAnalog();
+      } else {
+        this.isLoading = true;
+      }
     }
   }
 
@@ -54,10 +58,10 @@ class Sensors {
         config.data.analog[i].min,
         config.data.analog[i].max,
       );
-      
+
     }
   }
-  
+
 }
 
 // преобразование сигнала АЦП в диапазон шкалы измеряемого канала
