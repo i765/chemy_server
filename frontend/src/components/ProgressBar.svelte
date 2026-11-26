@@ -25,9 +25,9 @@
 
 <style>
   .progress-bar-container {
-    --main-color: #999999;
-    --warning-color: #ffd900;
-    --alarm-color: #ff0000;
+    --main-color: #999;
+    --warning-color: #fc0;
+    --alarm-color: #f00;
     margin: 6px 0;
     position: absolute;
     inset: 0;

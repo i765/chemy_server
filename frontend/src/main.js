@@ -6,8 +6,7 @@ import { sensors } from './sensors.svelte'
 
 const app = mount(App, {
   target: document.getElementById('app'),
-  config: config.fetchNow(),
-  sensors: sensors.startPolling(1000)
+  sensors: sensors.startPolling() // Запускаем опрос сервера
 })
 
 export default app

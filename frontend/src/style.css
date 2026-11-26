@@ -27,14 +27,3 @@ body {
     font-size: 14px;
 }
 
-.spa-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    height: 100dvh;
-    overflow: hidden;
-}
-
-.main-content {
-    padding: 20px 0;
-    overflow-y: auto;
-}

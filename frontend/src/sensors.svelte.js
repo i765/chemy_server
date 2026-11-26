@@ -4,7 +4,7 @@ class Sensors {
   // Глобальное реактивное состояние
   data = $state([]); // сырые данные с УСО (аналоговые и дискретные)
   analog = $state([]); // Преобразованные аналоговые данные
-  isLoading = $state(true);
+  isReady = $state(false); // Данные готовы
   error = $state(null);
 
   #timerId = null;
@@ -13,20 +13,25 @@ class Sensors {
   async fetchNow() {
     try {
       const response = await fetch("http://127.0.0.1:9765/frame");
-      if (!response.ok) {
-        throw new Error(`Ошибка HTTP: ${response.status}`);
+      if (response.ok) {
+        this.data = await response.json();
+        this.error = null
       }
-      this.data = await response.json();
-      this.error = null;
+
     } catch (err) {
-      this.error = err.message;
+      this.error = err;
+      this.isReady = false;
+
     } finally {
-      if (this.error === null) {
-        this.isLoading = false;
-        this.ConvertAnalog();
-      } else {
-        this.isLoading = true;
+      if (this.error == null) {       
+        if (config.isReady) {
+          this.ConvertAnalog(); // Если конфигурация готова, работаем с данными
+          this.isReady = true;
+        } else {
+          config.fetchNow(); // Если нет, делаем запрос конфигурации
+        }
       }
+      
     }
   }
 
@@ -50,34 +55,32 @@ class Sensors {
 
   // сортировка и линейное преобразование
   ConvertAnalog() {
-    const channelOffset = 1 // Смещение индексов каналов
+    const channelOffset = 1; // Смещение индексов каналов
     for (let i = 0; i < config.data.analog.length; i++) {
-      const address = config.data.analog[i].address + channelOffset // Адресация
+      const address = config.data.analog[i].address + channelOffset; // Адресация
       this.analog[i] = linearConvertAC(
-        this.data.analogValues[address], // Адресация 
+        this.data.analogValues[address], // Адресация
         config.data.analog[i].min,
         config.data.analog[i].max,
+        config.data.analog[i].factor,
+        config.data.analog[i].offset,
       );
-
     }
   }
-
 }
 
 // преобразование сигнала АЦП в диапазон шкалы измеряемого канала
-function linearConvertAC(value = 0, min = 0, max = 1) {
-  const round = roundFromRange(min, max);
+function linearConvertAC(value = 0, min = 0, max = 1, factor = 1, offset = 0) {
   const dacMax = 1023;
+  
+  // 1. Зажимаем сырое значение АЦП в допустимых пределах
+  const clampedValue = Math.min(Math.max(value, 0), dacMax);
 
-  if (value <= 0) {
-    return min;
-  }
+  // 2. Считаем по единой формуле (offset и factor сработают и на краях)
+  const converted = (min + ((max - min) * clampedValue) / dacMax + offset) * factor;
 
-  if (value >= dacMax) {
-    return max;
-  }
-
-  const converted = min + ((max - min) * value) / dacMax; // преобразуем
+  // 3. Точность лучше считать с учетом масштаба (factor)
+  const round = roundFromRange(min * factor, max * factor);
 
   return roundWithPrecision(converted, round);
 }

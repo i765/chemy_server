@@ -24,8 +24,9 @@
     display: grid;
     grid-column: 1 / -1; /* Растягиваем строку на все 4 колонки */
     grid-template-columns: subgrid; /* Наследуем размеры колонок от .grid-table */
-    border-radius: 8px;
+    border-radius: 6px;
     cursor: pointer;
+    margin-bottom: 1px;
   }
   .grid-row:not(.selected):hover {
     background-color: #f5f5f5;
@@ -34,12 +35,14 @@
     background-color: #eee;
   }
   .div-cell {
-    /* border-bottom: 1px solid var(--border-color); */
+    height: 25px;
     white-space: nowrap;
     overflow-x: hidden;
+    display: flex;
+    align-items: center;
   }
   .name {
-    font-weight: 300;
+    font-weight: 500;
     padding-left: 8px;
   }
   .bar {

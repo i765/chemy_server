@@ -16,6 +16,8 @@
       "unit": "м³/ч",
       "max": 2,
       "min": 0.113,
+      "factor": 1,
+      "offset": 0,
       "address": 38
     },
     {
@@ -178,8 +180,8 @@
       "unit": "м³/ч",
       "max": 1.0,
       "min": 0,
-      "MaxR":0.85,
-      "MaxY":0.65,
+      "MaxR": 0.85,
+      "MaxY": 0.65,
       "address": 106
     },
     {
@@ -189,8 +191,8 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "MaxR":1500,
-      "MaxY":1200,
+      "MaxR": 1500,
+      "MaxY": 1200,
       "address": 39
     },
     {
@@ -447,7 +449,7 @@
     }
   ],
   "calc": [
-    { 
+    {
       "id": 49,
       "channel": 0,
       "name": "v6TC101L02",
@@ -458,7 +460,7 @@
       "factor": 0.00288,
       "offset": 0.07
     },
-    { 
+    {
       "id": 50,
       "channel": 2,
       "name": "v6TC104L02",
@@ -469,7 +471,7 @@
       "factor": 0.00203,
       "offset": 0
     },
-    { 
+    {
       "id": 51,
       "channel": 4,
       "name": "v6TC106L02",
@@ -480,7 +482,7 @@
       "factor": 0.0038,
       "offset": 0.37
     },
-    { 
+    {
       "id": 52,
       "channel": 7,
       "name": "v6TL101L02",
@@ -491,7 +493,7 @@
       "factor": 0.00288,
       "offset": 0.07
     },
-    { 
+    {
       "id": 53,
       "channel": 8,
       "name": "v6TL102L02",
@@ -502,7 +504,7 @@
       "factor": 0.00317,
       "offset": 0.07
     },
-    { 
+    {
       "id": 54,
       "channel": 12,
       "name": "v6TL301L02",
@@ -513,7 +515,7 @@
       "factor": 0.00288,
       "offset": 0.07
     },
-    { 
+    {
       "id": 55,
       "channel": 17,
       "name": "v6TL601L02",
@@ -524,7 +526,7 @@
       "factor": 0.0038,
       "offset": 0.4
     },
-    { 
+    {
       "id": 56,
       "channel": 18,
       "name": "v6TL602L02",
@@ -535,7 +537,7 @@
       "factor": 0.0038,
       "offset": 0.4
     },
-    { 
+    {
       "id": 57,
       "channel": 20,
       "name": "v6TL801L02",
@@ -546,7 +548,7 @@
       "factor": 0.0038,
       "offset": 0.4
     },
-    { 
+    {
       "id": 58,
       "channel": 21,
       "name": "v6TL802L02",
@@ -557,7 +559,7 @@
       "factor": 0.0038,
       "offset": 0.4
     },
-    { 
+    {
       "id": 59,
       "channel": 22,
       "name": "v6TL901L02",
@@ -568,7 +570,7 @@
       "factor": 0.00125,
       "offset": 0.2
     },
-    { 
+    {
       "id": 60,
       "channel": 25,
       "name": "v6TW101L02",
@@ -579,7 +581,7 @@
       "factor": 0.00288,
       "offset": 0.07
     },
-    { 
+    {
       "id": 61,
       "channel": 26,
       "name": "v6TW102L02",
@@ -590,7 +592,7 @@
       "factor": 0.00288,
       "offset": 0.07
     },
-    { 
+    {
       "id": 62,
       "channel": 33,
       "name": "v6TW701L02",
@@ -601,7 +603,7 @@
       "factor": 0.0038,
       "offset": 0.4
     },
-    { 
+    {
       "id": 63,
       "channel": 34,
       "name": "v6TW702L02",

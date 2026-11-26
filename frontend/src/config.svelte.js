@@ -1,21 +1,23 @@
 class Config {
- 
   data = $state([]);
-  isLoading = $state(true);
+  isReady = $state(false);
   error = $state(null);
-
+  
   async fetchNow() {
     try {
       const response = await fetch("http://127.0.0.1:9765/config");
-      if (!response.ok) {
-        throw new Error(`Ошибка HTTP: ${response.status}`);
+      if (response.ok) {
+        this.data = await response.json();
+        this.error = null
       }
-      this.data = await response.json();
-      this.error = null;
+      
     } catch (err) {
-      this.error = err.message;
+      this.error = err
     } finally {
-      this.isLoading = false;
+      if (this.error === null) {
+        this.isReady = true;
+        console.log('Конфигурация загружена.')
+      }
     }
   }
 }
