@@ -7,7 +7,13 @@
       "unit": "мм",
       "max": 2000,
       "min": 0,
-      "address": 33
+      "address": 33,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1900.0,
+      "yel_h": 1700.0,
+      "yel_l": 50.0,
+      "red_l": 20.0
     },
     {
       "id": 1,
@@ -16,9 +22,13 @@
       "unit": "м³/ч",
       "max": 2,
       "min": 0.113,
+      "address": 38,
       "factor": 1,
       "offset": 0,
-      "address": 38
+      "red_h": 1.91,
+      "yel_h": 1.72,
+      "yel_l": 0.16,
+      "red_l": 0.13
     },
     {
       "id": 2,
@@ -27,7 +37,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 18
+      "address": 18,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 3,
@@ -36,7 +52,13 @@
       "unit": "м³/ч",
       "max": 2.0,
       "min": 0.113,
-      "address": 23
+      "address": 23,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1.91,
+      "yel_h": 1.72,
+      "yel_l": 0.16,
+      "red_l": 0.13
     },
     {
       "id": 4,
@@ -45,7 +67,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 31
+      "address": 31,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 5,
@@ -54,7 +82,13 @@
       "unit": "кПа",
       "max": 40.0,
       "min": 0,
-      "address": 35
+      "address": 35,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 38.0,
+      "yel_h": 34.0,
+      "yel_l": 1.0,
+      "red_l": 0.4
     },
     {
       "id": 6,
@@ -63,7 +97,13 @@
       "unit": "кПа",
       "max": 40.0,
       "min": 0,
-      "address": 30
+      "address": 30,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 38.0,
+      "yel_h": 34.0,
+      "yel_l": 1.0,
+      "red_l": 0.4
     },
     {
       "id": 7,
@@ -72,7 +112,13 @@
       "unit": "мм",
       "max": 2000,
       "min": 0,
-      "address": 2
+      "address": 2,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1900.0,
+      "yel_h": 1700.0,
+      "yel_l": 50.0,
+      "red_l": 20.0
     },
     {
       "id": 8,
@@ -81,7 +127,13 @@
       "unit": "мм",
       "max": 2000,
       "min": 0,
-      "address": 5
+      "address": 5,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1900.0,
+      "yel_h": 1700.0,
+      "yel_l": 50.0,
+      "red_l": 20.0
     },
     {
       "id": 9,
@@ -90,7 +142,13 @@
       "unit": "кПа",
       "max": 6.3,
       "min": 0,
-      "address": 11
+      "address": 11,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 5.98,
+      "yel_h": 5.35,
+      "yel_l": 0.16,
+      "red_l": 0.06
     },
     {
       "id": 10,
@@ -99,7 +157,13 @@
       "unit": "м³/ч",
       "max": 1.0,
       "min": 0,
-      "address": 103
+      "address": 103,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 0.95,
+      "yel_h": 0.85,
+      "yel_l": 0.03,
+      "red_l": 0.01
     },
     {
       "id": 11,
@@ -108,7 +172,13 @@
       "unit": "м³/ч",
       "max": 1.0,
       "min": 0,
-      "address": 102
+      "address": 102,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 0.95,
+      "yel_h": 0.85,
+      "yel_l": 0.03,
+      "red_l": 0.01
     },
     {
       "id": 12,
@@ -117,7 +187,13 @@
       "unit": "мм",
       "max": 2000,
       "min": 0,
-      "address": 10
+      "address": 10,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1900.0,
+      "yel_h": 1700.0,
+      "yel_l": 50.0,
+      "red_l": 20.0
     },
     {
       "id": 13,
@@ -126,7 +202,13 @@
       "unit": "г/м³",
       "max": 5.0,
       "min": 0,
-      "address": 98
+      "address": 98,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 4.75,
+      "yel_h": 4.25,
+      "yel_l": 0.12,
+      "red_l": 0.05
     },
     {
       "id": 14,
@@ -135,7 +217,13 @@
       "unit": "м³/ч",
       "max": 1.0,
       "min": 0,
-      "address": 101
+      "address": 101,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 0.95,
+      "yel_h": 0.85,
+      "yel_l": 0.03,
+      "red_l": 0.01
     },
     {
       "id": 15,
@@ -144,7 +232,13 @@
       "unit": "кПа",
       "max": 160,
       "min": 0,
-      "address": 1
+      "address": 1,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 152.0,
+      "yel_h": 136.0,
+      "yel_l": 4.0,
+      "red_l": 1.6
     },
     {
       "id": 16,
@@ -153,7 +247,13 @@
       "unit": "м³/ч",
       "max": 1,
       "min": 0,
-      "address": 99
+      "address": 99,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 0.95,
+      "yel_h": 0.85,
+      "yel_l": 0.03,
+      "red_l": 0.01
     },
     {
       "id": 17,
@@ -162,7 +262,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 13
+      "address": 13,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 18,
@@ -171,7 +277,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 3
+      "address": 3,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 19,
@@ -180,9 +292,13 @@
       "unit": "м³/ч",
       "max": 1.0,
       "min": 0,
-      "MaxR": 0.85,
-      "MaxY": 0.65,
-      "address": 106
+      "address": 106,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 0.95,
+      "yel_h": 0.85,
+      "yel_l": 0.03,
+      "red_l": 0.01
     },
     {
       "id": 20,
@@ -191,9 +307,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "MaxR": 1500,
-      "MaxY": 1200,
-      "address": 39
+      "address": 39,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 21,
@@ -202,7 +322,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 36
+      "address": 36,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 22,
@@ -211,7 +337,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 37
+      "address": 37,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 23,
@@ -220,7 +352,13 @@
       "unit": "м³/ч",
       "max": 0.3,
       "min": 0.028,
-      "address": 34
+      "address": 34,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 0.29,
+      "yel_h": 0.26,
+      "yel_l": 0.03,
+      "red_l": 0.03
     },
     {
       "id": 24,
@@ -229,7 +367,13 @@
       "unit": "°C",
       "max": 400,
       "min": -50,
-      "address": 0
+      "address": 0,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 377.5,
+      "yel_h": 332.5,
+      "yel_l": -38.75,
+      "red_l": -45.5
     },
     {
       "id": 25,
@@ -238,7 +382,13 @@
       "unit": "мм",
       "max": 2000,
       "min": 0,
-      "address": 8
+      "address": 8,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1900.0,
+      "yel_h": 1700.0,
+      "yel_l": 50.0,
+      "red_l": 20.0
     },
     {
       "id": 26,
@@ -247,7 +397,13 @@
       "unit": "мм",
       "max": 2000,
       "min": 0,
-      "address": 15
+      "address": 15,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1900.0,
+      "yel_h": 1700.0,
+      "yel_l": 50.0,
+      "red_l": 20.0
     },
     {
       "id": 27,
@@ -256,7 +412,13 @@
       "unit": "м³/ч",
       "max": 2,
       "min": 0.113,
-      "address": 4
+      "address": 4,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1.91,
+      "yel_h": 1.72,
+      "yel_l": 0.16,
+      "red_l": 0.13
     },
     {
       "id": 28,
@@ -265,7 +427,13 @@
       "unit": "м³/ч",
       "max": 2.0,
       "min": 0.113,
-      "address": 9
+      "address": 9,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1.91,
+      "yel_h": 1.72,
+      "yel_l": 0.16,
+      "red_l": 0.13
     },
     {
       "id": 29,
@@ -274,7 +442,13 @@
       "unit": "м³/ч",
       "max": 2.0,
       "min": 0.113,
-      "address": 16
+      "address": 16,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1.91,
+      "yel_h": 1.72,
+      "yel_l": 0.16,
+      "red_l": 0.13
     },
     {
       "id": 30,
@@ -283,7 +457,13 @@
       "unit": "г/м³",
       "max": 10,
       "min": 0,
-      "address": 100
+      "address": 100,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 9.5,
+      "yel_h": 8.5,
+      "yel_l": 0.25,
+      "red_l": 0.1
     },
     {
       "id": 31,
@@ -292,7 +472,13 @@
       "unit": "г/м³",
       "max": 50,
       "min": 0,
-      "address": 97
+      "address": 97,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 47.5,
+      "yel_h": 42.5,
+      "yel_l": 1.25,
+      "red_l": 0.5
     },
     {
       "id": 32,
@@ -301,7 +487,13 @@
       "unit": "м³/ч",
       "max": 2.0,
       "min": 0.113,
-      "address": 6
+      "address": 6,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1.91,
+      "yel_h": 1.72,
+      "yel_l": 0.16,
+      "red_l": 0.13
     },
     {
       "id": 33,
@@ -310,7 +502,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 14
+      "address": 14,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 34,
@@ -319,7 +517,13 @@
       "unit": "мм",
       "max": 1600,
       "min": 0,
-      "address": 7
+      "address": 7,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1520.0,
+      "yel_h": 1360.0,
+      "yel_l": 40.0,
+      "red_l": 16.0
     },
     {
       "id": 35,
@@ -328,7 +532,13 @@
       "unit": "м³/ч",
       "max": 8.0,
       "min": 0.113,
-      "address": 26
+      "address": 26,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 7.61,
+      "yel_h": 6.82,
+      "yel_l": 0.31,
+      "red_l": 0.19
     },
     {
       "id": 36,
@@ -337,7 +547,13 @@
       "unit": "м³/ч",
       "max": 75000,
       "min": 0,
-      "address": 0
+      "address": 0,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 71250.0,
+      "yel_h": 63750.0,
+      "yel_l": 1875.0,
+      "red_l": 750.0
     },
     {
       "id": 37,
@@ -346,7 +562,13 @@
       "unit": "л/ч",
       "max": 250,
       "min": 0,
-      "address": 25
+      "address": 25,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 237.5,
+      "yel_h": 212.5,
+      "yel_l": 6.25,
+      "red_l": 2.5
     },
     {
       "id": 38,
@@ -355,7 +577,13 @@
       "unit": "л/ч",
       "max": 1600,
       "min": 160,
-      "address": 20
+      "address": 20,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1528.0,
+      "yel_h": 1384.0,
+      "yel_l": 196.0,
+      "red_l": 174.4
     },
     {
       "id": 39,
@@ -364,7 +592,13 @@
       "unit": "кг/см²",
       "max": 100,
       "min": 0,
-      "address": 29
+      "address": 29,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 95.0,
+      "yel_h": 85.0,
+      "yel_l": 2.5,
+      "red_l": 1.0
     },
     {
       "id": 40,
@@ -373,16 +607,28 @@
       "unit": "pH",
       "max": 12,
       "min": 2,
-      "address": 81
+      "address": 81,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 11.5,
+      "yel_h": 10.5,
+      "yel_l": 2.25,
+      "red_l": 2.1
     },
     {
       "id": 41,
-      "name": "TL303Q02Ж",
+      "name": "TL303Q02",
       "desc": "Проводимость фильтрата",
       "unit": "мСм/см",
       "max": 199,
       "min": 0,
-      "address": 22
+      "address": 22,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 189.05,
+      "yel_h": 169.15,
+      "yel_l": 4.98,
+      "red_l": 1.99
     },
     {
       "id": 42,
@@ -391,7 +637,13 @@
       "unit": "л/ч",
       "max": 250,
       "min": 0,
-      "address": 27
+      "address": 27,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 237.5,
+      "yel_h": 212.5,
+      "yel_l": 6.25,
+      "red_l": 2.5
     },
     {
       "id": 43,
@@ -400,7 +652,13 @@
       "unit": "л/ч",
       "max": 1600,
       "min": 160,
-      "address": 24
+      "address": 24,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 1528.0,
+      "yel_h": 1384.0,
+      "yel_l": 196.0,
+      "red_l": 174.4
     },
     {
       "id": 44,
@@ -409,7 +667,13 @@
       "unit": "кг/см²",
       "max": 100,
       "min": 0,
-      "address": 21
+      "address": 21,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 95.0,
+      "yel_h": 85.0,
+      "yel_l": 2.5,
+      "red_l": 1.0
     },
     {
       "id": 45,
@@ -418,7 +682,13 @@
       "unit": "pH",
       "max": 12,
       "min": 2,
-      "address": 82
+      "address": 82,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 11.5,
+      "yel_h": 10.5,
+      "yel_l": 2.25,
+      "red_l": 2.1
     },
     {
       "id": 46,
@@ -427,7 +697,13 @@
       "unit": "мСм/см",
       "max": 199,
       "min": 0,
-      "address": 19
+      "address": 19,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 189.05,
+      "yel_h": 169.15,
+      "yel_l": 4.98,
+      "red_l": 1.99
     },
     {
       "id": 47,
@@ -436,7 +712,13 @@
       "unit": "мм",
       "max": 500,
       "min": 0,
-      "address": 28
+      "address": 28,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 475.0,
+      "yel_h": 425.0,
+      "yel_l": 12.5,
+      "red_l": 5.0
     },
     {
       "id": 48,
@@ -445,174 +727,13 @@
       "unit": "мм",
       "max": 500,
       "min": 0,
-      "address": 17
-    }
-  ],
-  "calc": [
-    {
-      "id": 49,
-      "channel": 0,
-      "name": "v6TC101L02",
-      "desc": "Объем в емкости TC101A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.00288,
-      "offset": 0.07
-    },
-    {
-      "id": 50,
-      "channel": 2,
-      "name": "v6TC104L02",
-      "desc": "Объем в емкости TC104A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.00203,
-      "offset": 0
-    },
-    {
-      "id": 51,
-      "channel": 4,
-      "name": "v6TC106L02",
-      "desc": "Объем в емкости TC106A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.0038,
-      "offset": 0.37
-    },
-    {
-      "id": 52,
-      "channel": 7,
-      "name": "v6TL101L02",
-      "desc": "Объем в емкости TL101A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.00288,
-      "offset": 0.07
-    },
-    {
-      "id": 53,
-      "channel": 8,
-      "name": "v6TL102L02",
-      "desc": "Объем в емкости TL102A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.00317,
-      "offset": 0.07
-    },
-    {
-      "id": 54,
-      "channel": 12,
-      "name": "v6TL301L02",
-      "desc": "Объем в емкости TL301A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.00288,
-      "offset": 0.07
-    },
-    {
-      "id": 55,
-      "channel": 17,
-      "name": "v6TL601L02",
-      "desc": "Объем в емкости TL601A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.0038,
-      "offset": 0.4
-    },
-    {
-      "id": 56,
-      "channel": 18,
-      "name": "v6TL602L02",
-      "desc": "Объем в емкости TL602A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.0038,
-      "offset": 0.4
-    },
-    {
-      "id": 57,
-      "channel": 20,
-      "name": "v6TL801L02",
-      "desc": "Объем в емкости TL801A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.0038,
-      "offset": 0.4
-    },
-    {
-      "id": 58,
-      "channel": 21,
-      "name": "v6TL802L02",
-      "desc": "Объем в емкости TL802A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.0038,
-      "offset": 0.4
-    },
-    {
-      "id": 59,
-      "channel": 22,
-      "name": "v6TL901L02",
-      "desc": "Объем в емкости TL901A",
-      "unit": "м³",
-      "max": 2,
-      "min": 0,
-      "factor": 0.00125,
-      "offset": 0.2
-    },
-    {
-      "id": 60,
-      "channel": 25,
-      "name": "v6TW101L02",
-      "desc": "Объем в емкости TW101A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.00288,
-      "offset": 0.07
-    },
-    {
-      "id": 61,
-      "channel": 26,
-      "name": "v6TW102L02",
-      "desc": "Объем в емкости TW102A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.00288,
-      "offset": 0.07
-    },
-    {
-      "id": 62,
-      "channel": 33,
-      "name": "v6TW701L02",
-      "desc": "Объем в емкости TW701A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.0038,
-      "offset": 0.4
-    },
-    {
-      "id": 63,
-      "channel": 34,
-      "name": "v6TW702L02",
-      "desc": "Объем в емкости TW702A",
-      "unit": "м³",
-      "max": 6,
-      "min": 0,
-      "factor": 0.0038,
-      "offset": 0.4
+      "address": 17,
+      "factor": 1,
+      "offset": 0,
+      "red_h": 475.0,
+      "yel_h": 425.0,
+      "yel_l": 12.5,
+      "red_l": 5.0
     }
   ]
 }

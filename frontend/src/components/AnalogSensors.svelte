@@ -8,7 +8,7 @@
 
 <div class="div-table">
   {#each config.data.analog as item}
-    <AnalogSensorItem {item} value={sensors.analog[item.id]} />
+    <AnalogSensorItem {item} value={sensors.analog[item.id]}  status={sensors.warnings[item.id]}/>
   {/each}
 </div>
 
@@ -18,5 +18,4 @@
     grid-template-columns: 110px 85px 125px 1fr;
     width: 100%;
   }
-
 </style>

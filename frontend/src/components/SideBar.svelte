@@ -1,52 +1,51 @@
 <script>
-import { slide } from 'svelte/transition';
-import { linear } from 'svelte/easing';
+  import { slide } from "svelte/transition";
+  import { linear } from "svelte/easing";
+
   let items = [
     {
-      id: 'analog',
-      label: 'Аналоговые',
+      id: "analog",
+      label: "Аналоговые",
       open: false,
       children: [
-        { id: 'linear', label: 'Линейные', href: '#linear' },
-        { id: 'calc',   label: 'Вычисляемые', href: '#calc' },
-        { id: 'deriv',  label: 'Производные', href: '#deriv' },
+        { id: "linear", label: "Линейные", href: "#section=analog&sub=linear" },
+        { id: "calc", label: "Вычисляемые", href: "#section=analog&sub=calc" },
+        { id: "deriv", label: "Производные", href: "#section=analog&sub=deriv" },
       ],
     },
     {
-      id: 'discrete',
-      label: 'Дискретные',
+      id: "discrete",
+      label: "Дискретные",
       open: false,
       children: [
-        { id: 'alarm', label: 'Аварийные', href: '#alarm' },
-        { id: 'g1', label: 'Группа 1', href: '#g1' },
-        { id: 'g2', label: 'Группа 2', href: '#g2' },
-        { id: 'g3', label: 'Группа 3', href: '#g3' },
-        { id: 'g4', label: 'Группа 4', href: '#g4' },
-        { id: 'g5', label: 'Группа 5', href: '#g5' },
+        { id: "alarm", label: "Аварийные", href: "#section=discrete&sub=alarm" },
+        { id: "g1", label: "Группа 1", href: "#section=discrete&sub=g1" },
+        { id: "g2", label: "Группа 2", href: "#section=discrete&sub=g2" },
+        { id: "g3", label: "Группа 3", href: "#section=discrete&sub=g3" },
+        { id: "g4", label: "Группа 4", href: "#section=discrete&sub=g4" },
+        { id: "g5", label: "Группа 5", href: "#section=discrete&sub=g5" },
       ],
     },
     {
-      id: 'moemos',
-      label: 'Мнемосхемы',
+      id: "moemos",
+      label: "Мнемосхемы",
       open: false,
       children: [
-        { id: 'salt', label: 'Солевые', href: '#salt' },
-        { id: 'wbp', label: 'Переработка вод ЦБС', href: '#wbp' },
-        { id: 'gas', label: 'Узел газоочистки', href: '#gas' },
-        { id: 'laundry', label: 'Спецпрачечная', href: '#laundry' },
+        { id: "salt", label: "Солевые", href: "#salt" },
+        { id: "wbp", label: "Переработка вод ЦБС", href: "#wbp" },
+        { id: "gas", label: "Узел газоочистки", href: "#gas" },
+        { id: "laundry", label: "Спецпрачечная", href: "#laundry" },
       ],
     },
   ];
 
-  let activeId = $state(null)  // Активный пункт
-  let openStates = $state({});  // Состояние открытых разделов
+  let activeId = $state(null); // Активный пункт
+  let openStates = $state({}); // Состояние открытых разделов
 
   $effect(() => {
-    activeId = localStorage.getItem('active') ?? 'linear'
-    openStates = JSON.parse(localStorage.getItem('openStates')) ?? {}
+    activeId = localStorage.getItem("active") ?? "linear";
+    openStates = JSON.parse(localStorage.getItem("openStates")) ?? {};
   });
-
-
 
   items.forEach((item) => {
     openStates[item.id] = item.open ?? false;
@@ -55,18 +54,17 @@ import { linear } from 'svelte/easing';
   // Открыть / закрыть раздел
   function toggle(id) {
     openStates = { ...openStates, [id]: !openStates[id] };
-    localStorage.setItem('openStates', JSON.stringify(openStates))
+    localStorage.setItem("openStates", JSON.stringify(openStates));
   }
 
   // Сделать пункт активным
   function activate(id) {
     activeId = id;
-    localStorage.setItem('active', id)
+    localStorage.setItem("active", id);
   }
 </script>
 
 <aside class="sidebar">
-
   <nav class="sidebar-tree">
     <ul>
       {#each items as item (item.id)}
@@ -84,11 +82,15 @@ import { linear } from 'svelte/easing';
           </button>
 
           {#if openStates[item.id]}
-            <ul id={item.id} class="tree-children" transition:slide={{ duration: 200, easing: linear }}>
+            <ul
+              id={item.id}
+              class="tree-children"
+              transition:slide={{ duration: 200, easing: linear }}
+            >
               {#each item.children as child (child.id)}
                 <li>
                   <a
-                    href={child.href ?? '#'}
+                    href={child.href ?? "#"}
                     class="tree-child"
                     class:active={activeId === child.id}
                     onclick={() => activate(child.id)}
@@ -103,10 +105,6 @@ import { linear } from 'svelte/easing';
       {/each}
     </ul>
   </nav>
-
-  
-
-
 </aside>
 
 <style>
@@ -126,7 +124,7 @@ import { linear } from 'svelte/easing';
     padding: 12px 6px;
     display: flex;
     flex-direction: column;
-    border-radius:20px;
+    border-radius: 20px;
   }
 
   .sidebar-tree {
@@ -136,7 +134,6 @@ import { linear } from 'svelte/easing';
   .sidebar-tree ul {
     list-style: none;
   }
-
 
   .tree-parent {
     display: flex;
@@ -149,14 +146,15 @@ import { linear } from 'svelte/easing';
     cursor: pointer;
     font-family: inherit;
     font-weight: 500;
-    transition: transform 200ms linear, opacity 200ms linear;
+    transition:
+      transform 200ms linear,
+      opacity 200ms linear;
     opacity: 0.6;
   }
 
-  .tree-parent:hover{
+  .tree-parent:hover {
     opacity: 1;
   }
-
 
   .tree-parent .chevron {
     margin-left: auto;
@@ -172,15 +170,13 @@ import { linear } from 'svelte/easing';
     transform: rotate(45deg);
   }
 
-  .tree-parent:hover .chevron{
+  .tree-parent:hover .chevron {
     opacity: 1;
   }
-
 
   /* Дочерние пункты */
   .tree-children {
     padding-left: 16px;
-    
   }
 
   .tree-child {
@@ -205,7 +201,5 @@ import { linear } from 'svelte/easing';
     color: var(--item-active-text);
     font-weight: 400;
     transition: background-color 250ms ease-out;
-
   }
-
 </style>

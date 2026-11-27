@@ -1,17 +1,39 @@
 <script>
   import SideBar from "./components/SideBar.svelte";
   import AnalogSensors from "./components/AnalogSensors.svelte";
+  import DiscreteSensors from "./components/DiscreteSensors.svelte";
   import { config } from "./config.svelte";
   import { sensors } from "./sensors.svelte";
+  import { on } from "svelte/events";
+  import { onMount } from "svelte";
 
+  let hashParams = $state("");
+
+  function parseHash() {
+    // Убираем первый символ '#'
+    const rawHash = window.location.hash.slice(1);
+    // Превращаем строку в удобный объект
+    const params = new URLSearchParams(rawHash);
+    hashParams = Object.fromEntries(params.entries());
+  }
+
+  onMount(() => {
+    parseHash();
+  });
 </script>
+
+<svelte:window onhashchange={parseHash} />
 
 <div class="spa-layout">
   <SideBar />
 
   <div class="main-content">
     {#if sensors.isReady}
-      <AnalogSensors {config} />
+      {#if hashParams.section === "analog"}
+        <AnalogSensors {config} />
+      {:else if hashParams.section === "discrete"}
+        <DiscreteSensors />
+      {/if}
     {:else}
       <div class="loader">
         <div class="informer">
@@ -24,7 +46,6 @@
 </div>
 
 <style>
-
   @keyframes fadeIn {
     to {
       opacity: 1;
